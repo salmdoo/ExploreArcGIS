@@ -1,0 +1,407 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		146FECE92B33E49300C9A319 /* DemoArcGISApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146FECE82B33E49300C9A319 /* DemoArcGISApp.swift */; };
+		146FECEB2B33E49300C9A319 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146FECEA2B33E49300C9A319 /* ContentView.swift */; };
+		146FECED2B33E49400C9A319 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146FECEC2B33E49400C9A319 /* Assets.xcassets */; };
+		146FECF02B33E49400C9A319 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146FECEF2B33E49400C9A319 /* Preview Assets.xcassets */; };
+		146FECF82B33E52D00C9A319 /* ArcGIS in Frameworks */ = {isa = PBXBuildFile; productRef = 146FECF72B33E52D00C9A319 /* ArcGIS */; };
+		146FECFA2B33ED8000C9A319 /* WebMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146FECF92B33ED8000C9A319 /* WebMapView.swift */; };
+		146FED222B34A8C400C9A319 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146FED212B34A8C400C9A319 /* MapModel.swift */; };
+		146FED242B34A9CB00C9A319 /* OfflineMapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146FED232B34A9CB00C9A319 /* OfflineMapModel.swift */; };
+		146FED372B34E2BF00C9A319 /* ArcGISToolkit in Frameworks */ = {isa = PBXBuildFile; productRef = 146FED362B34E2BF00C9A319 /* ArcGISToolkit */; };
+		146FED392B34E6C800C9A319 /* MapItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146FED382B34E6C800C9A319 /* MapItem.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		146FECE52B33E49300C9A319 /* DemoArcGIS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoArcGIS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		146FECE82B33E49300C9A319 /* DemoArcGISApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoArcGISApp.swift; sourceTree = "<group>"; };
+		146FECEA2B33E49300C9A319 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		146FECEC2B33E49400C9A319 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		146FECEF2B33E49400C9A319 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		146FECF92B33ED8000C9A319 /* WebMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebMapView.swift; sourceTree = "<group>"; };
+		146FED212B34A8C400C9A319 /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
+		146FED232B34A9CB00C9A319 /* OfflineMapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineMapModel.swift; sourceTree = "<group>"; };
+		146FED382B34E6C800C9A319 /* MapItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapItem.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		146FECE22B33E49300C9A319 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				146FED372B34E2BF00C9A319 /* ArcGISToolkit in Frameworks */,
+				146FECF82B33E52D00C9A319 /* ArcGIS in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		146FECDC2B33E49300C9A319 = {
+			isa = PBXGroup;
+			children = (
+				146FECE72B33E49300C9A319 /* DemoArcGIS */,
+				146FECE62B33E49300C9A319 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		146FECE62B33E49300C9A319 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				146FECE52B33E49300C9A319 /* DemoArcGIS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		146FECE72B33E49300C9A319 /* DemoArcGIS */ = {
+			isa = PBXGroup;
+			children = (
+				146FECE82B33E49300C9A319 /* DemoArcGISApp.swift */,
+				146FECF92B33ED8000C9A319 /* WebMapView.swift */,
+				146FECEA2B33E49300C9A319 /* ContentView.swift */,
+				146FECEC2B33E49400C9A319 /* Assets.xcassets */,
+				146FECEE2B33E49400C9A319 /* Preview Content */,
+				146FED212B34A8C400C9A319 /* MapModel.swift */,
+				146FED232B34A9CB00C9A319 /* OfflineMapModel.swift */,
+				146FED382B34E6C800C9A319 /* MapItem.swift */,
+			);
+			path = DemoArcGIS;
+			sourceTree = "<group>";
+		};
+		146FECEE2B33E49400C9A319 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				146FECEF2B33E49400C9A319 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		146FECE42B33E49300C9A319 /* DemoArcGIS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 146FECF32B33E49400C9A319 /* Build configuration list for PBXNativeTarget "DemoArcGIS" */;
+			buildPhases = (
+				146FECE12B33E49300C9A319 /* Sources */,
+				146FECE22B33E49300C9A319 /* Frameworks */,
+				146FECE32B33E49300C9A319 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DemoArcGIS;
+			packageProductDependencies = (
+				146FECF72B33E52D00C9A319 /* ArcGIS */,
+				146FED362B34E2BF00C9A319 /* ArcGISToolkit */,
+			);
+			productName = DemoArcGIS;
+			productReference = 146FECE52B33E49300C9A319 /* DemoArcGIS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		146FECDD2B33E49300C9A319 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1510;
+				LastUpgradeCheck = 1510;
+				TargetAttributes = {
+					146FECE42B33E49300C9A319 = {
+						CreatedOnToolsVersion = 15.1;
+					};
+				};
+			};
+			buildConfigurationList = 146FECE02B33E49300C9A319 /* Build configuration list for PBXProject "DemoArcGIS" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 146FECDC2B33E49300C9A319;
+			packageReferences = (
+				146FECF62B33E52D00C9A319 /* XCRemoteSwiftPackageReference "arcgis-maps-sdk-swift" */,
+				146FED352B34E2BF00C9A319 /* XCRemoteSwiftPackageReference "arcgis-maps-sdk-swift-toolkit" */,
+			);
+			productRefGroup = 146FECE62B33E49300C9A319 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				146FECE42B33E49300C9A319 /* DemoArcGIS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		146FECE32B33E49300C9A319 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				146FECF02B33E49400C9A319 /* Preview Assets.xcassets in Resources */,
+				146FECED2B33E49400C9A319 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		146FECE12B33E49300C9A319 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				146FED242B34A9CB00C9A319 /* OfflineMapModel.swift in Sources */,
+				146FED222B34A8C400C9A319 /* MapModel.swift in Sources */,
+				146FECEB2B33E49300C9A319 /* ContentView.swift in Sources */,
+				146FECE92B33E49300C9A319 /* DemoArcGISApp.swift in Sources */,
+				146FECFA2B33ED8000C9A319 /* WebMapView.swift in Sources */,
+				146FED392B34E6C800C9A319 /* MapItem.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		146FECF12B33E49400C9A319 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		146FECF22B33E49400C9A319 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		146FECF42B33E49400C9A319 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"DemoArcGIS/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.salmdoo.DemoMap.DemoArcGIS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		146FECF52B33E49400C9A319 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"DemoArcGIS/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.salmdoo.DemoMap.DemoArcGIS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		146FECE02B33E49300C9A319 /* Build configuration list for PBXProject "DemoArcGIS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				146FECF12B33E49400C9A319 /* Debug */,
+				146FECF22B33E49400C9A319 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		146FECF32B33E49400C9A319 /* Build configuration list for PBXNativeTarget "DemoArcGIS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				146FECF42B33E49400C9A319 /* Debug */,
+				146FECF52B33E49400C9A319 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		146FECF62B33E52D00C9A319 /* XCRemoteSwiftPackageReference "arcgis-maps-sdk-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Esri/arcgis-maps-sdk-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 200.3.0;
+			};
+		};
+		146FED352B34E2BF00C9A319 /* XCRemoteSwiftPackageReference "arcgis-maps-sdk-swift-toolkit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Esri/arcgis-maps-sdk-swift-toolkit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 200.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		146FECF72B33E52D00C9A319 /* ArcGIS */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 146FECF62B33E52D00C9A319 /* XCRemoteSwiftPackageReference "arcgis-maps-sdk-swift" */;
+			productName = ArcGIS;
+		};
+		146FED362B34E2BF00C9A319 /* ArcGISToolkit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 146FED352B34E2BF00C9A319 /* XCRemoteSwiftPackageReference "arcgis-maps-sdk-swift-toolkit" */;
+			productName = ArcGISToolkit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 146FECDD2B33E49300C9A319 /* Project object */;
+}
