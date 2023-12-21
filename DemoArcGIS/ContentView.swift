@@ -10,19 +10,17 @@ import ArcGIS
 
 struct ContentView: View {
     
-    @StateObject private var model = Model()
+    @State private var model = MapModel()
     
     var body: some View {
         ScrollView {
             LazyVStack {
-                if let _ = model.webMap {
-                    Section {
-                        MapItem(thumbnail: model.portalItem.thumbnail?.url, title: model.portalItem.title, description: model.portalItem.snippet)
-                    } header: {
-                        Text("Web View")
-                            .font(.title)
-                            .bold()
-                    }
+                Section {
+                    MapItem(thumbnail: model.portalItem.thumbnail?.url, title: model.portalItem.title, description: model.portalItem.snippet)
+                } header: {
+                    Text("Web View")
+                        .font(.title)
+                        .bold()
                 }
                 
                 if let preplannedMaps = model.offlineMapModels {

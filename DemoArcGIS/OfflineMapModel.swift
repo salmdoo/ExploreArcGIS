@@ -8,7 +8,8 @@
 import Foundation
 import ArcGIS
 
-class OfflineMapModel: ObservableObject,Identifiable {
+@Observable
+class OfflineMapModel: Identifiable {
     let preplannedMapArea: PreplannedMapArea
     
     

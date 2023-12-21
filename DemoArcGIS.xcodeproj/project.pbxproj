@@ -65,12 +65,12 @@
 			children = (
 				146FECE82B33E49300C9A319 /* DemoArcGISApp.swift */,
 				146FECF92B33ED8000C9A319 /* WebMapView.swift */,
-				146FECEA2B33E49300C9A319 /* ContentView.swift */,
-				146FECEC2B33E49400C9A319 /* Assets.xcassets */,
-				146FECEE2B33E49400C9A319 /* Preview Content */,
 				146FED212B34A8C400C9A319 /* MapModel.swift */,
 				146FED232B34A9CB00C9A319 /* OfflineMapModel.swift */,
 				146FED382B34E6C800C9A319 /* MapItem.swift */,
+				146FECEA2B33E49300C9A319 /* ContentView.swift */,
+				146FECEC2B33E49400C9A319 /* Assets.xcassets */,
+				146FECEE2B33E49400C9A319 /* Preview Content */,
 			);
 			path = DemoArcGIS;
 			sourceTree = "<group>";

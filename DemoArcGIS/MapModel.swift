@@ -10,17 +10,14 @@ import Combine
 import ArcGISToolkit
 import ArcGIS
 
-@MainActor
-class Model: ObservableObject {
+@Observable
+class MapModel {
    let portalItem = PortalItem.exploreMaine()
     
-    @Published var webMap: Map?
-    
     private let offlineMapTask: OfflineMapTask
-    @Published private(set) var offlineMapModels: Result<[OfflineMapModel], Error>?
+    private(set) var offlineMapModels: Result<[OfflineMapModel], Error>?
     
     init() {
-        self.webMap = Map(item: portalItem)
         self.offlineMapTask = OfflineMapTask(portalItem: portalItem)
         Task {
             await makeOfflineMapModels()
