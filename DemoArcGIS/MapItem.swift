@@ -10,7 +10,7 @@ import ArcGIS
 
 class MapItem: Identifiable {
     var portalItem: PortalItem? = nil
-    let id =  UUID()
+    private(set) var id : String
     let thumbnailUrl: URL?
     let title: String?
     let snippet: String?
@@ -20,12 +20,14 @@ class MapItem: Identifiable {
         self.thumbnailUrl = portalItem.thumbnail?.url
         self.title = portalItem.title
         self.snippet = portalItem.snippet
+        self.id = portalItem.id?.rawValue ?? UUID().uuidString
     }
     
-    init(thumbnailUrl: URL?, title: String?, snippet: String?) {
+    init(id: String? = nil, thumbnailUrl: URL?, title: String?, snippet: String?) {
         self.thumbnailUrl = thumbnailUrl
         self.title = title
         self.snippet = snippet
+        self.id = id ?? UUID().uuidString
     }
     
     static func previewData() -> MapItem {
@@ -40,15 +42,10 @@ class OnlineMap: MapItem {
         portalItem != nil ? Map(item: portalItem!) : nil
     }()
     
-    
     override init(portalItem: PortalItem) {
         super.init(portalItem: portalItem)
     }
 }
-
-
-
-
 
 protocol OfflineMapProtocol {
     func loadDownloaded() async -> Map?

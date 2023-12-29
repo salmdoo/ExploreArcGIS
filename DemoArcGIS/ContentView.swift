@@ -14,47 +14,48 @@ struct ContentView: View {
     @State private var model = MapModel()
     
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                LazyVStack {
-                    Section {
-                        if let onlineMap = model.webmapOnline as? OnlineMap {
-                            NavigationLink {
-                               WebMapView(map: onlineMap.map)
-                            } label: {
-                                MapItemView(model: MapItem(thumbnailUrl: model.portalItem.thumbnail?.url, title: model.portalItem.title, snippet: model.portalItem.snippet))
-                                    .foregroundColor(.black)
-                            }
-                            .navigationBarTitleDisplayMode(.inline)
-                            .navigationTitle("Explore Maine")
+        NavigationView {
+            List {
+                Section {
+                    if let onlineMap = model.webmapOnline as? OnlineMap {
+                        NavigationLink {
+                           WebMapView(map: onlineMap.map)
+                        } label: {
+                            MapItemView(model: MapItem(thumbnailUrl: model.portalItem.thumbnail?.url, title: model.portalItem.title, snippet: model.portalItem.snippet))
+                                .foregroundColor(.black)
                         }
+                       
                         
-                        
+                    }
+                    
+                    
+                } header: {
+                    Text("Web View")
+                        .bold()
+                }
+                
+                if let preplannedMaps = model.offlineMapModels {
+                    Section {
+                        switch preplannedMaps {
+                        case .success(let maps):
+                            ForEach (maps) {mapItem in
+                                PreplannedMapItemView(model: mapItem)
+                            }
+                        case .failure (let error):
+                            Text(error.localizedDescription)
+                        }
                     } header: {
-                        Text("Web View")
-                            .font(.title)
+                        Text("Map Areas")
                             .bold()
                     }
-                    if let preplannedMaps = model.offlineMapModels {
-                        Section {
-                            switch preplannedMaps {
-                            case .success(let maps):
-                                ForEach (maps) {mapItem in
-                                    PreplannedMapItemView(model: mapItem)
-                                }
-                            case .failure (let error):
-                                Text(error.localizedDescription)
-                            }
-                        } header: {
-                            Text("Map Area")
-                                .font(.title)
-                                .bold()
-                        }
-                        
-                    }
+                    
                 }
             }
-        }
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("Explore Maine")
+    }.listStyle(PlainListStyle())
+    
+            
     }
 }
 

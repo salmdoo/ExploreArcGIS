@@ -13,6 +13,7 @@
 		142EA7812B3E383F00F09AD7 /* MapDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 142EA77E2B3E383F00F09AD7 /* MapDataModel.xcdatamodeld */; };
 		145AE93B2B3E68FF00DEA320 /* MapItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145AE93A2B3E68FF00DEA320 /* MapItem.swift */; };
 		145AE93D2B3E73C000DEA320 /* OfflineStoredMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145AE93C2B3E73C000DEA320 /* OfflineStoredMap.swift */; };
+		145AE93F2B3F18B200DEA320 /* NavigationWithoutDisclosureIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145AE93E2B3F18B200DEA320 /* NavigationWithoutDisclosureIndicator.swift */; };
 		146FECE92B33E49300C9A319 /* DemoArcGISApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146FECE82B33E49300C9A319 /* DemoArcGISApp.swift */; };
 		146FECEB2B33E49300C9A319 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146FECEA2B33E49300C9A319 /* ContentView.swift */; };
 		146FECED2B33E49400C9A319 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146FECEC2B33E49400C9A319 /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 		142EA7802B3E383F00F09AD7 /* MapDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MapDataModel.xcdatamodel; sourceTree = "<group>"; };
 		145AE93A2B3E68FF00DEA320 /* MapItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapItem.swift; sourceTree = "<group>"; };
 		145AE93C2B3E73C000DEA320 /* OfflineStoredMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineStoredMap.swift; sourceTree = "<group>"; };
+		145AE93E2B3F18B200DEA320 /* NavigationWithoutDisclosureIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationWithoutDisclosureIndicator.swift; sourceTree = "<group>"; };
 		146FECE52B33E49300C9A319 /* DemoArcGIS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoArcGIS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		146FECE82B33E49300C9A319 /* DemoArcGISApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoArcGISApp.swift; sourceTree = "<group>"; };
 		146FECEA2B33E49300C9A319 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 		145AE9392B3E5CF400DEA320 /* MapItemView */ = {
 			isa = PBXGroup;
 			children = (
+				145AE93E2B3F18B200DEA320 /* NavigationWithoutDisclosureIndicator.swift */,
 				146FED382B34E6C800C9A319 /* MapItemView.swift */,
 				142EA7702B3D0A8E00F09AD7 /* PreplannedMapItemView.swift */,
 			);
@@ -199,6 +202,7 @@
 				142EA77D2B3E363E00F09AD7 /* Persistence.swift in Sources */,
 				142EA7812B3E383F00F09AD7 /* MapDataModel.xcdatamodeld in Sources */,
 				142EA7712B3D0A8E00F09AD7 /* PreplannedMapItemView.swift in Sources */,
+				145AE93F2B3F18B200DEA320 /* NavigationWithoutDisclosureIndicator.swift in Sources */,
 				146FED242B34A9CB00C9A319 /* OfflinePreplannedMap.swift in Sources */,
 				146FED222B34A8C400C9A319 /* MapModel.swift in Sources */,
 				145AE93B2B3E68FF00DEA320 /* MapItem.swift in Sources */,

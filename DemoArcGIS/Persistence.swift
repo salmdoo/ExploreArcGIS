@@ -26,32 +26,45 @@ struct PersistenceController {
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
     
-    func fetchAllMaps() -> Result<[OfflineStoredMap], Error> {
+    func fetchAllMaps() throws -> [MapOffline]  {
         let context = container.viewContext
+        return try context.fetch(fetchRequest)
         
-        do {
-            let results = try context.fetch(fetchRequest)
-            return Result {
-                results.compactMap { OfflineStoredMap(offlineModel: $0) }
-            }
-        } catch {
-            return .failure(error)
-        }
+//        do {
+//            let results = try context.fetch(fetchRequest)
+//            return Result {
+//                results.compactMap { OfflineStoredMap(offlineModel: $0) }
+//            }
+//        } catch {
+//            return .failure(error)
+//        }
     }
     
-     func saveMap(map: OfflineStoredMap){
+     func saveMap(map: OfflineStoredMap) throws {
          let context = container.viewContext
          let mapSaved = MapOffline(context: context)
          mapSaved.title = map.title
-         mapSaved.id = map.portalItem?.id?.description
+         mapSaved.id = map.id
          mapSaved.snippet = map.snippet
-         mapSaved.mapFile = map.mapURL
          mapSaved.thumbnailUrl = map.thumbnailUrl
          
-         do {
-             try context.save()
-         } catch {
-             print("PersistenceController - save() - Cannot save meal with meal id \(mapSaved.id!)")
-         }
+         try context.save()
+    }
+    
+    func deleteMap(id: String) throws {
+        let context = container.viewContext
+        
+        let fetchResult = try context.fetch(fetchRequest)
+        
+        for item in fetchResult {
+            if let itemId = item.id, itemId == id {
+                context.delete(item)
+            }
+        }
+        
+        if context.hasChanges {
+            try context.save()
+        }
+                
     }
 }

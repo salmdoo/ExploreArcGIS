@@ -28,10 +28,11 @@ class MapModel {
     private let storageMap: MapStorageProtocol
     
     init() {
-        storageMap = CoreDataMapStorage()
+        
         
         // Creates temp directory.
         temporaryDirectory = FileManager.createTemporaryDirectory()
+        storageMap = CoreDataMapStorage(temporaryDirectory: temporaryDirectory)
         
         // Initializes the online map and offline map task.
         offlineMapTask = OfflineMapTask(portalItem: portalItem)
@@ -43,7 +44,7 @@ class MapModel {
     
     func makeOfflineMapModels() async {
         offlineMapModels = await Result {
-            let offlineStoredMapTemp = storageMap.loadAllMap()
+            let offlineStoredMapTemp = try storageMap.loadAllMap()
             
             let offlinePreplannedMap =
             try await offlineMapTask.preplannedMapAreas
@@ -62,7 +63,7 @@ class MapModel {
     }
     
     deinit {
-       // try? FileManager.default.removeItem(at: temporaryDirectory)
+        try? FileManager.default.removeItem(at: temporaryDirectory)
     }
     
 }

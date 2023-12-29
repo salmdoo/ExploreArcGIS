@@ -8,6 +8,8 @@
 import Foundation
 import ArcGIS
 
+
+
 @Observable
 /// An object that encapsulates state about an offline map.
 final class OfflinePreplannedMap: MapItem {
@@ -28,16 +30,18 @@ final class OfflinePreplannedMap: MapItem {
     private(set) var result: Result<MobileMapPackage, Error>?
     
     private let storageMap: MapStorageProtocol
+    private let temporaryDirectory: URL
     
     init?(preplannedMapArea: PreplannedMapArea, offlineMapTask: OfflineMapTask, temporaryDirectory: URL, storageMap: MapStorageProtocol) {
         self.preplannedMapArea = preplannedMapArea
         self.offlineMapTask = offlineMapTask
         self.storageMap = storageMap
+        self.temporaryDirectory = temporaryDirectory
         
-        if let itemID = preplannedMapArea.portalItem.id {
-            self.mmpkDirectory = temporaryDirectory
-                .appendingPathComponent(itemID.rawValue)
-                .appendingPathExtension("mmpk")
+        if let itemID = preplannedMapArea.portalItem.id,
+           let fileURL =  FileManager.createMMPKTemporaryDirectory(temporaryDirectory: temporaryDirectory, fileName: itemID.rawValue) {
+            self.mmpkDirectory = fileURL
+            
         } else {
             return nil
         }
@@ -95,7 +99,7 @@ extension OfflinePreplannedMap: OfflineMapProtocol {
         result = await self.job?.result.map { $0.mobileMapPackage }
         
         // Save map to local
-        storageMap.saveMap(map: OfflineStoredMap(map: self))
+        try? storageMap.saveMap(map: OfflineStoredMap(map: self, mapStorage: storageMap))
         
         // Sets the job to nil
         self.job = nil
@@ -138,9 +142,10 @@ extension OfflinePreplannedMap: OfflineMapProtocol {
     }
     
     /// Removes the downloaded offline map (mmpk) from disk.
-    func removeDownloaded() {
+    nonisolated func removeDownloaded() {
         result = nil
         try? FileManager.default.removeItem(at: mmpkDirectory)
+        try? storageMap.deleteMap(mapId: self.id)
     }
     
     func loadDownloaded() -> Map? {
@@ -159,10 +164,20 @@ extension FileManager {
     static func createTemporaryDirectory() -> URL {
         // swiftlint:disable:next force_try
         try! FileManager.default.url(
-            for: .itemReplacementDirectory,
+            for: .documentDirectory,
             in: .userDomainMask,
             appropriateFor: FileManager.default.temporaryDirectory,
             create: true
         )
+    }
+    
+    static func createMMPKTemporaryDirectory(temporaryDirectory: URL, fileName: String?) -> URL? {
+        if let fileName {
+           return temporaryDirectory
+                .appendingPathComponent(fileName)
+                .appendingPathExtension("mmpk")
+        } else {
+            return nil
+        }
     }
 }

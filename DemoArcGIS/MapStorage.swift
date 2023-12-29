@@ -10,31 +10,26 @@ import ArcGIS
 
 
 protocol MapStorageProtocol {
-    func saveMap(map: OfflineStoredMap)
-    func deleteMap(mapId: String)
-    func loadAllMap() -> [MapItem]
+    func saveMap(map: OfflineStoredMap) throws
+    func deleteMap(mapId: String) throws
+    func loadAllMap() throws -> [MapItem]
 }
 
 struct CoreDataMapStorage: MapStorageProtocol {
     private let persistent = PersistenceController.instance
+    let temporaryDirectory: URL
     
-    func saveMap(map: OfflineStoredMap) {
-        persistent.saveMap(map: map)
+    func saveMap(map: OfflineStoredMap) throws {
+        try persistent.saveMap(map: map)
     }
     
-    func deleteMap(mapId: String) {
-        //persistent.saveMap(map: <#T##OfflineStoredMap#>)
+    func deleteMap(mapId: String) throws {
+        try persistent.deleteMap(id: mapId)
     }
     
-    func loadAllMap() -> [MapItem] {
-        let map = persistent.fetchAllMaps()
-        switch map {
-        case .success(let result):
-            return result
-        case .failure(let err):
-            print("Error at loadAllMap - CoreDataMapStorage")
-            return []
-        }
+    func loadAllMap() throws -> [MapItem] {
+        let results = try persistent.fetchAllMaps()
+        return results.compactMap { OfflineStoredMap(offlineModel: $0, mapStorage: self, temporaryDirectory: temporaryDirectory)}
     }
     
     

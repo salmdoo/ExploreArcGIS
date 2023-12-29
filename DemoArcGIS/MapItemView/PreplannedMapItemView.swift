@@ -23,20 +23,30 @@ struct PreplannedMapItemView: View {
                 } label: {
                     MapItemView(model: model)
                         .foregroundColor(.black)
-                }
+                }.disabled(!offlineStored.canViewDetails)
                 .onAppear(){
                     Task {
                         downloadedMap = await offlineStored.loadDownloaded()
                     }
                 }
                 Spacer()
-                Button(action: {
-                    offlineStored.removeDownloaded()
-                }, label: {
-                    Image(systemName: "trash")
+                switch offlineStored.result {
+                case .none:
+                    Button(action: {
+                        offlineStored.removeDownloaded()
+                    }, label: {
+                        Image(systemName: "trash")
+                            .iconBackground()
+                            .foregroundColor(.red)
+                    })
+                case .success(_ ):
+                    Image(systemName: "eye.trianglebadge.exclamationmark")
+                        .iconBackground()
+                case .failure:
+                    Image(systemName: "exclamationmark.circle")
                         .iconBackground()
                         .foregroundColor(.red)
-                })
+                }
 
             }
             
@@ -51,13 +61,14 @@ struct PreplannedMapItemView: View {
                         .foregroundColor(.black)
                 }.disabled(!offlineModel.downloadDidSucceed)
                 
-            Spacer()
-                
+                Spacer()
             
                 if offlineModel.isDownloading, let job = offlineModel.job {
+                    
                     ProgressView(job.progress)
-                        .progressViewStyle(.gauge)
-                        .padding()
+                        .iconBackground()
+                        .progressViewStyle(CircularProgressViewStyle())
+                        .labelsHidden()
                 } else {
                     
                     switch offlineModel.result {
@@ -92,31 +103,6 @@ struct PreplannedMapItemView: View {
     }
 }
 
-/// A circular gauge progress view style.
-private struct GaugeProgressViewStyle: ProgressViewStyle {
-    private var strokeStyle: StrokeStyle { .init(lineWidth: 3, lineCap: .round) }
-    
-    func makeBody(configuration: Configuration) -> some View {
-        if let fractionCompleted = configuration.fractionCompleted {
-            ZStack {
-                Circle()
-                    .stroke(Color(.systemGray5), style: strokeStyle)
-                Circle()
-                    .trim(from: 0, to: fractionCompleted)
-                    .stroke(.gray, style: strokeStyle)
-                    .rotationEffect(.degrees(-90))
-            }
-            .fixedSize()
-        }
-    }
-}
-
-private extension ProgressViewStyle where Self == GaugeProgressViewStyle {
-    /// A progress view that visually indicates its progress with a gauge.
-    static var gauge: Self { .init() }
-}
-
-
 struct IconBackground: ViewModifier {
     func body(content: Content) -> some View {
         content
@@ -126,6 +112,11 @@ struct IconBackground: ViewModifier {
     }
 }
 extension Image {
+    func iconBackground() -> some View {
+        self.modifier(IconBackground())
+    }
+}
+extension ProgressView {
     func iconBackground() -> some View {
         self.modifier(IconBackground())
     }

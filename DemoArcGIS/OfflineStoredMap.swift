@@ -8,17 +8,22 @@
 import Foundation
 import ArcGIS
 
+@Observable
 class OfflineStoredMap: MapItem, OfflineMapProtocol {
     
-    private let persistent: MapStorageProtocol? = nil
+    private let mapStorage: MapStorageProtocol?
+    private var mmpkDirectory: URL? = nil
+    private(set) var result: Result<Bool, Error>?
+    private(set) var canViewDetails = true
     
     @MainActor
     func loadDownloaded() async -> Map? {
-        if let mapURL {
-            let mapPackage = MobileMapPackage(fileURL: mapURL)
+        if let fileURL = mmpkDirectory {
             
+            let mapPackage = MobileMapPackage(fileURL: fileURL)
             do {
                try await mapPackage.load()
+                return mapPackage.maps.first
             } catch {
                 return nil
             }
@@ -27,27 +32,27 @@ class OfflineStoredMap: MapItem, OfflineMapProtocol {
     }
     
     func removeDownloaded() {
-        if let title {
-            persistent?.deleteMap(mapId: title)
+        do{
+            try mapStorage?.deleteMap(mapId: id)
+            canViewDetails = false
+            result = .success(true)
+        } catch {
+            result = .failure(error)
+        }
+        if let fileURL = mmpkDirectory {
+            try? FileManager.default.removeItem(at: fileURL)
         }
     }
     
-    private(set) var mapURL: URL?
-    
-    init(mapURL: URL, thumbnailUrl: URL, title: String, snippet: String) {
-        
-        self.mapURL = mapURL
-        super.init(thumbnailUrl: thumbnailUrl, title: title, snippet: snippet)
+    init(offlineModel: MapOffline, mapStorage: MapStorageProtocol, temporaryDirectory: URL) {
+        self.mapStorage = mapStorage
+        self.mmpkDirectory = FileManager.createMMPKTemporaryDirectory(temporaryDirectory: temporaryDirectory, fileName: offlineModel.id)
+        super.init(id: offlineModel.id, thumbnailUrl: offlineModel.thumbnailUrl, title: offlineModel.title, snippet: offlineModel.snippet)
     }
     
-    init(offlineModel: MapOffline) {
-        self.mapURL = offlineModel.mapFile
-        super.init(thumbnailUrl: offlineModel.thumbnailUrl, title: offlineModel.title, snippet: offlineModel.snippet)
-    }
-    
-    init(map: OfflinePreplannedMap) {
-        self.mapURL = map.mmpkDirectory
-        super.init(thumbnailUrl: map.thumbnailUrl, title: map.title, snippet: map.snippet)
+    init(map: OfflinePreplannedMap, mapStorage: MapStorageProtocol) {
+        self.mapStorage = mapStorage
+        super.init(portalItem: map.preplannedMapArea.portalItem)
     }
     
 }

@@ -28,11 +28,13 @@ struct MapItemView: View {
             VStack (alignment: .leading) {
                 if let title = model.title  {
                     Text(title)
-                        .font(.title)
+                        .font(.title3)
                 }
                 
                 if let snippet = model.snippet {
                     Text(snippet)
+                        .font(.subheadline)
+                        .opacity(0.6)
                 }
             }
         }.frame(maxHeight: 100)

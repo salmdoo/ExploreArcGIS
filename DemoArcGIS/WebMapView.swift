@@ -20,5 +20,5 @@ struct WebMapView: View {
 
 #Preview {
     WebMapView(map: Map(
-        item: PortalItem(portal: .arcGISOnline(connection: .anonymous), id: PortalItem.ID("3bc3179f17da44a0ac0bfdac4ad15664")!)))
+        item: PortalItem.exploreMaine()))
 }
