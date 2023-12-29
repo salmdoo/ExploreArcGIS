@@ -48,7 +48,6 @@ struct PersistenceController {
          mapSaved.mapFile = map.mapURL
          mapSaved.thumbnailUrl = map.thumbnailUrl
          
-         print(map.title)
          do {
              try context.save()
          } catch {

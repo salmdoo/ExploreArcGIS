@@ -42,7 +42,6 @@ class OnlineMap: MapItem {
     
     
     override init(portalItem: PortalItem) {
-        print("Print: " + portalItem.title)
         super.init(portalItem: portalItem)
     }
 }

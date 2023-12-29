@@ -19,7 +19,6 @@ class OfflineStoredMap: MapItem, OfflineMapProtocol {
             
             do {
                try await mapPackage.load()
-                return mapPackage.maps.first
             } catch {
                 return nil
             }

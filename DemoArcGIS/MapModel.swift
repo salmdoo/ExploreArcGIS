@@ -14,7 +14,7 @@ import ArcGIS
 class MapModel {
     
     /// A portal item displaying the Explore Maine
-    private let portalItem = PortalItem.exploreMaine()
+     let portalItem = PortalItem.exploreMaine()
     
     var webmapOnline: MapItem
     
@@ -57,13 +57,12 @@ class MapModel {
                     
                 }
             let filtered = offlinePreplannedMap.filter { !offlineStoredMapTemp.map({ $0.title }).contains($0.title) }
-            var result = offlineStoredMapTemp + filtered
-            return result
+            return offlineStoredMapTemp + filtered
         }
     }
     
     deinit {
-        try? FileManager.default.removeItem(at: temporaryDirectory)
+       // try? FileManager.default.removeItem(at: temporaryDirectory)
     }
     
 }

@@ -20,9 +20,10 @@ struct ContentView: View {
                     Section {
                         if let onlineMap = model.webmapOnline as? OnlineMap {
                             NavigationLink {
-                                WebMapView(map: onlineMap.map)
+                               WebMapView(map: onlineMap.map)
                             } label: {
-                                MapItemView(model: onlineMap)
+                                MapItemView(model: MapItem(thumbnailUrl: model.portalItem.thumbnail?.url, title: model.portalItem.title, snippet: model.portalItem.snippet))
+                                    .foregroundColor(.black)
                             }
                             .navigationBarTitleDisplayMode(.inline)
                             .navigationTitle("Explore Maine")
