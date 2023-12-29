@@ -11,7 +11,7 @@ import SwiftUI
 struct DemoArcGISApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+                ContentView()
         }
     }
 }

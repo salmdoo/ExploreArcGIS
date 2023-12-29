@@ -2,53 +2,57 @@
 //  MapItem.swift
 //  DemoArcGIS
 //
-//  Created by Salmdo on 12/21/23.
+//  Created by Salmdo on 12/28/23.
 //
 
-import SwiftUI
+import Foundation
+import ArcGIS
 
-struct MapItem: View {
-    let thumbnail: URL?
+class MapItem: Identifiable {
+    var portalItem: PortalItem? = nil
+    let id =  UUID()
+    let thumbnailUrl: URL?
     let title: String?
-    let description: String?
-    let showOption: Bool
+    let snippet: String?
     
-    init(thumbnail: URL?, title: String?, description: String?, showOption: Bool = false) {
-        self.thumbnail = thumbnail
-        self.title = title
-        self.description = description
-        self.showOption = showOption
+    init(portalItem: PortalItem) {
+        self.portalItem = portalItem
+        self.thumbnailUrl = portalItem.thumbnail?.url
+        self.title = portalItem.title
+        self.snippet = portalItem.snippet
     }
     
-    var body: some View {
-        HStack {
-            AsyncImage(url: thumbnail) { img in
-                img.resizable()
-                    .scaledToFit()
-            } placeholder: {
-                Image(systemName: "photo")
-            }
-            .frame(width: 100, height: 100, alignment: .center)
-            
-            VStack (alignment: .leading) {
-                if let title  {
-                    Text(title)
-                        .font(.title)
-                }
-                
-                if let description {
-                    Text(description)
-                }
-            }
-            Spacer()
-            if showOption {
-                Image(systemName: "icloud.and.arrow.down")
-                    .padding()
-            }
-        }.frame(maxHeight: 100)
+    init(thumbnailUrl: URL?, title: String?, snippet: String?) {
+        self.thumbnailUrl = thumbnailUrl
+        self.title = title
+        self.snippet = snippet
+    }
+    
+    static func previewData() -> MapItem {
+        return MapItem(thumbnailUrl: URL(string: "https://www.arcgis.com/sharing/rest/content/items/ 3bc3179f17da44a0acObfdac4ad15664/info/ thumbnail/ago_downloaded.png")!,
+                            title: "Bonston Circle",
+                            snippet: "It lies on Massachusetts Bay, an arm of the Atlantic Ocean. The city proper has an unusually small area for a major city")
     }
 }
 
-#Preview {
-    MapItem(thumbnail: URL(string: "https://www.arcgis.com/sharing/rest/content/items/ 3bc3179f17da44a0acObfdac4ad15664/info/ thumbnail/ago_downloaded.png"), title: "Bonston Circle", description: "It lies on Massachusetts Bay, an arm of the Atlantic Ocean. The city proper has an unusually small area for a major city")
+class OnlineMap: MapItem {
+    lazy var map: Map? = {
+        portalItem != nil ? Map(item: portalItem!) : nil
+    }()
+    
+    
+    override init(portalItem: PortalItem) {
+        print("Print: " + portalItem.title)
+        super.init(portalItem: portalItem)
+    }
 }
+
+
+
+
+
+protocol OfflineMapProtocol {
+    func loadDownloaded() async -> Map?
+    func removeDownloaded()
+}
+

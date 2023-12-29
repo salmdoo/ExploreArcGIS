@@ -8,42 +8,52 @@
 import SwiftUI
 import ArcGIS
 
+
 struct ContentView: View {
     
     @State private var model = MapModel()
     
     var body: some View {
-        ScrollView {
-            LazyVStack {
-                Section {
-                    MapItem(thumbnail: model.portalItem.thumbnail?.url, title: model.portalItem.title, description: model.portalItem.snippet)
-                } header: {
-                    Text("Web View")
-                        .font(.title)
-                        .bold()
-                }
-                
-                if let preplannedMaps = model.offlineMapModels {
+        NavigationStack {
+            ScrollView {
+                LazyVStack {
                     Section {
-                        switch preplannedMaps {
-                        case .success(let maps):
-                            ForEach (maps) {mapItem in
-                                let item = mapItem.preplannedMapArea.portalItem
-                                MapItem(thumbnail: item.thumbnail?.url, title: item.title, description: item.snippet, showOption: true)
+                        if let onlineMap = model.webmapOnline as? OnlineMap {
+                            NavigationLink {
+                                WebMapView(map: onlineMap.map)
+                            } label: {
+                                MapItemView(model: onlineMap)
                             }
-                        case .failure(let err):
-                            Text("Err")
+                            .navigationBarTitleDisplayMode(.inline)
+                            .navigationTitle("Explore Maine")
                         }
+                        
+                        
                     } header: {
-                        Text("Map Area")
+                        Text("Web View")
                             .font(.title)
                             .bold()
                     }
-                    
+                    if let preplannedMaps = model.offlineMapModels {
+                        Section {
+                            switch preplannedMaps {
+                            case .success(let maps):
+                                ForEach (maps) {mapItem in
+                                    PreplannedMapItemView(model: mapItem)
+                                }
+                            case .failure (let error):
+                                Text(error.localizedDescription)
+                            }
+                        } header: {
+                            Text("Map Area")
+                                .font(.title)
+                                .bold()
+                        }
+                        
+                    }
                 }
             }
         }
-        
     }
 }
 

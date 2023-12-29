@@ -12,33 +12,68 @@ import ArcGIS
 
 @Observable
 class MapModel {
-   let portalItem = PortalItem.exploreMaine()
+    
+    /// A portal item displaying the Explore Maine
+    private let portalItem = PortalItem.exploreMaine()
+    
+    var webmapOnline: MapItem
     
     private let offlineMapTask: OfflineMapTask
-    private(set) var offlineMapModels: Result<[OfflineMapModel], Error>?
+    
+    // A URL to a temporary directory where the downloaded map packages are stored.
+    private let temporaryDirectory: URL
+
+    private(set) var offlineMapModels: Result<[MapItem], Error>?
+
+    private let storageMap: MapStorageProtocol
     
     init() {
-        self.offlineMapTask = OfflineMapTask(portalItem: portalItem)
+        storageMap = CoreDataMapStorage()
+        
+        // Creates temp directory.
+        temporaryDirectory = FileManager.createTemporaryDirectory()
+        
+        // Initializes the online map and offline map task.
+        offlineMapTask = OfflineMapTask(portalItem: portalItem)
+        webmapOnline = OnlineMap(portalItem: portalItem)
         Task {
             await makeOfflineMapModels()
         }
     }
     
-    
     func makeOfflineMapModels() async {
-        self.offlineMapModels = await Result {
+        offlineMapModels = await Result {
+            let offlineStoredMapTemp = storageMap.loadAllMap()
+            
+            let offlinePreplannedMap =
             try await offlineMapTask.preplannedMapAreas
-                .sorted(using: KeyPathComparator(\.portalItem.title))
                 .compactMap {
-                    OfflineMapModel(preplannedMapArea: $0 )
+                    OfflinePreplannedMap(
+                        preplannedMapArea: $0,
+                        offlineMapTask: offlineMapTask,
+                        temporaryDirectory: temporaryDirectory,
+                        storageMap: storageMap
+                    )
+                    
                 }
+            let filtered = offlinePreplannedMap.filter { !offlineStoredMapTemp.map({ $0.title }).contains($0.title) }
+            var result = offlineStoredMapTemp + filtered
+            return result
         }
+    }
+    
+    deinit {
+        try? FileManager.default.removeItem(at: temporaryDirectory)
     }
     
 }
 
-private extension PortalItem {
+//fileprivate
+ extension PortalItem {
     static func exploreMaine() -> PortalItem {
-        PortalItem(portal: .arcGISOnline(connection: .anonymous), id: PortalItem.ID("3bc3179f17da44a0ac0bfdac4ad15664")!)
+        PortalItem(portal: .arcGISOnline(connection: .anonymous),
+                   id: PortalItem.ID("3bc3179f17da44a0ac0bfdac4ad15664")!)
     }
 }
+
+

@@ -9,15 +9,16 @@ import SwiftUI
 import ArcGIS
 
 struct WebMapView: View {
-    
-    @State private var map = Map(
-        item: PortalItem(portal: .arcGISOnline(connection: .anonymous), id: PortalItem.ID("3bc3179f17da44a0ac0bfdac4ad15664")!))
+    let map: Map?
     
     var body: some View {
-        MapView(map: map)
+        if let map {
+            MapView(map: map)
+        }
     }
 }
 
 #Preview {
-    WebMapView()
+    WebMapView(map: Map(
+        item: PortalItem(portal: .arcGISOnline(connection: .anonymous), id: PortalItem.ID("3bc3179f17da44a0ac0bfdac4ad15664")!)))
 }

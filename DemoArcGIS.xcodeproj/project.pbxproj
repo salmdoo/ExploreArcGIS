@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		142EA7712B3D0A8E00F09AD7 /* PreplannedMapItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142EA7702B3D0A8E00F09AD7 /* PreplannedMapItemView.swift */; };
+		142EA7772B3E1B1B00F09AD7 /* MapStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142EA7762B3E1B1B00F09AD7 /* MapStorage.swift */; };
+		142EA77D2B3E363E00F09AD7 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142EA77C2B3E363E00F09AD7 /* Persistence.swift */; };
+		142EA7812B3E383F00F09AD7 /* MapDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 142EA77E2B3E383F00F09AD7 /* MapDataModel.xcdatamodeld */; };
+		145AE93B2B3E68FF00DEA320 /* MapItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145AE93A2B3E68FF00DEA320 /* MapItem.swift */; };
+		145AE93D2B3E73C000DEA320 /* OfflineStoredMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145AE93C2B3E73C000DEA320 /* OfflineStoredMap.swift */; };
 		146FECE92B33E49300C9A319 /* DemoArcGISApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146FECE82B33E49300C9A319 /* DemoArcGISApp.swift */; };
 		146FECEB2B33E49300C9A319 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146FECEA2B33E49300C9A319 /* ContentView.swift */; };
 		146FECED2B33E49400C9A319 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146FECEC2B33E49400C9A319 /* Assets.xcassets */; };
@@ -14,12 +20,19 @@
 		146FECF82B33E52D00C9A319 /* ArcGIS in Frameworks */ = {isa = PBXBuildFile; productRef = 146FECF72B33E52D00C9A319 /* ArcGIS */; };
 		146FECFA2B33ED8000C9A319 /* WebMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146FECF92B33ED8000C9A319 /* WebMapView.swift */; };
 		146FED222B34A8C400C9A319 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146FED212B34A8C400C9A319 /* MapModel.swift */; };
-		146FED242B34A9CB00C9A319 /* OfflineMapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146FED232B34A9CB00C9A319 /* OfflineMapModel.swift */; };
+		146FED242B34A9CB00C9A319 /* OfflinePreplannedMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146FED232B34A9CB00C9A319 /* OfflinePreplannedMap.swift */; };
 		146FED372B34E2BF00C9A319 /* ArcGISToolkit in Frameworks */ = {isa = PBXBuildFile; productRef = 146FED362B34E2BF00C9A319 /* ArcGISToolkit */; };
-		146FED392B34E6C800C9A319 /* MapItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146FED382B34E6C800C9A319 /* MapItem.swift */; };
+		146FED392B34E6C800C9A319 /* MapItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146FED382B34E6C800C9A319 /* MapItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		142EA7702B3D0A8E00F09AD7 /* PreplannedMapItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreplannedMapItemView.swift; sourceTree = "<group>"; };
+		142EA7762B3E1B1B00F09AD7 /* MapStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStorage.swift; sourceTree = "<group>"; };
+		142EA77C2B3E363E00F09AD7 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		142EA77F2B3E383F00F09AD7 /* MapLocalStorage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MapLocalStorage.xcdatamodel; sourceTree = "<group>"; };
+		142EA7802B3E383F00F09AD7 /* MapDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MapDataModel.xcdatamodel; sourceTree = "<group>"; };
+		145AE93A2B3E68FF00DEA320 /* MapItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapItem.swift; sourceTree = "<group>"; };
+		145AE93C2B3E73C000DEA320 /* OfflineStoredMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineStoredMap.swift; sourceTree = "<group>"; };
 		146FECE52B33E49300C9A319 /* DemoArcGIS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoArcGIS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		146FECE82B33E49300C9A319 /* DemoArcGISApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoArcGISApp.swift; sourceTree = "<group>"; };
 		146FECEA2B33E49300C9A319 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -27,8 +40,8 @@
 		146FECEF2B33E49400C9A319 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		146FECF92B33ED8000C9A319 /* WebMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebMapView.swift; sourceTree = "<group>"; };
 		146FED212B34A8C400C9A319 /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
-		146FED232B34A9CB00C9A319 /* OfflineMapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineMapModel.swift; sourceTree = "<group>"; };
-		146FED382B34E6C800C9A319 /* MapItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapItem.swift; sourceTree = "<group>"; };
+		146FED232B34A9CB00C9A319 /* OfflinePreplannedMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflinePreplannedMap.swift; sourceTree = "<group>"; };
+		146FED382B34E6C800C9A319 /* MapItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +57,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		142EA77B2B3E360E00F09AD7 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				142EA77C2B3E363E00F09AD7 /* Persistence.swift */,
+				142EA77E2B3E383F00F09AD7 /* MapDataModel.xcdatamodeld */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		145AE9392B3E5CF400DEA320 /* MapItemView */ = {
+			isa = PBXGroup;
+			children = (
+				146FED382B34E6C800C9A319 /* MapItemView.swift */,
+				142EA7702B3D0A8E00F09AD7 /* PreplannedMapItemView.swift */,
+			);
+			path = MapItemView;
+			sourceTree = "<group>";
+		};
 		146FECDC2B33E49300C9A319 = {
 			isa = PBXGroup;
 			children = (
@@ -63,12 +94,16 @@
 		146FECE72B33E49300C9A319 /* DemoArcGIS */ = {
 			isa = PBXGroup;
 			children = (
+				142EA77B2B3E360E00F09AD7 /* CoreData */,
 				146FECE82B33E49300C9A319 /* DemoArcGISApp.swift */,
 				146FECF92B33ED8000C9A319 /* WebMapView.swift */,
 				146FED212B34A8C400C9A319 /* MapModel.swift */,
-				146FED232B34A9CB00C9A319 /* OfflineMapModel.swift */,
-				146FED382B34E6C800C9A319 /* MapItem.swift */,
+				146FED232B34A9CB00C9A319 /* OfflinePreplannedMap.swift */,
+				145AE93C2B3E73C000DEA320 /* OfflineStoredMap.swift */,
+				145AE93A2B3E68FF00DEA320 /* MapItem.swift */,
 				146FECEA2B33E49300C9A319 /* ContentView.swift */,
+				145AE9392B3E5CF400DEA320 /* MapItemView */,
+				142EA7762B3E1B1B00F09AD7 /* MapStorage.swift */,
 				146FECEC2B33E49400C9A319 /* Assets.xcassets */,
 				146FECEE2B33E49400C9A319 /* Preview Content */,
 			);
@@ -161,12 +196,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				146FED242B34A9CB00C9A319 /* OfflineMapModel.swift in Sources */,
+				142EA77D2B3E363E00F09AD7 /* Persistence.swift in Sources */,
+				142EA7812B3E383F00F09AD7 /* MapDataModel.xcdatamodeld in Sources */,
+				142EA7712B3D0A8E00F09AD7 /* PreplannedMapItemView.swift in Sources */,
+				146FED242B34A9CB00C9A319 /* OfflinePreplannedMap.swift in Sources */,
 				146FED222B34A8C400C9A319 /* MapModel.swift in Sources */,
+				145AE93B2B3E68FF00DEA320 /* MapItem.swift in Sources */,
 				146FECEB2B33E49300C9A319 /* ContentView.swift in Sources */,
 				146FECE92B33E49300C9A319 /* DemoArcGISApp.swift in Sources */,
 				146FECFA2B33ED8000C9A319 /* WebMapView.swift in Sources */,
-				146FED392B34E6C800C9A319 /* MapItem.swift in Sources */,
+				142EA7772B3E1B1B00F09AD7 /* MapStorage.swift in Sources */,
+				146FED392B34E6C800C9A319 /* MapItemView.swift in Sources */,
+				145AE93D2B3E73C000DEA320 /* OfflineStoredMap.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,6 +443,20 @@
 			productName = ArcGISToolkit;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		142EA77E2B3E383F00F09AD7 /* MapDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				142EA77F2B3E383F00F09AD7 /* MapLocalStorage.xcdatamodel */,
+				142EA7802B3E383F00F09AD7 /* MapDataModel.xcdatamodel */,
+			);
+			currentVersion = 142EA77F2B3E383F00F09AD7 /* MapLocalStorage.xcdatamodel */;
+			path = MapDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 146FECDD2B33E49300C9A319 /* Project object */;
 }
