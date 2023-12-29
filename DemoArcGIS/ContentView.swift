@@ -12,26 +12,26 @@ import ArcGIS
 struct ContentView: View {
     
     @State private var model = MapModel()
+    @EnvironmentObject var networkMonitor: NetworkMonitor
     
     var body: some View {
         NavigationView {
-            List {
-                Section {
-                    if let onlineMap = model.webmapOnline as? OnlineMap {
-                        NavigationLink {
-                           WebMapView(map: onlineMap.map)
-                        } label: {
-                            MapItemView(model: MapItem(thumbnailUrl: model.portalItem.thumbnail?.url, title: model.portalItem.title, snippet: model.portalItem.snippet))
-                                .foregroundColor(.black)
+            ScrollView {
+                if networkMonitor.isConnected {
+                    Section {
+                        if
+                            let onlineMap = model.webmapOnline as? OnlineMap {
+                            NavigationLink {
+                                WebMapView(map: onlineMap.map)
+                            } label: {
+                                MapItemView(model: MapItem(thumbnailUrl: model.portalItem.thumbnail?.url, title: model.portalItem.title, snippet: model.portalItem.snippet))
+                                    .foregroundColor(.black)
+                            }
                         }
-                       
-                        
+                    } header: {
+                        Text("Web View")
+                            .bold()
                     }
-                    
-                    
-                } header: {
-                    Text("Web View")
-                        .bold()
                 }
                 
                 if let preplannedMaps = model.offlineMapModels {
@@ -53,9 +53,13 @@ struct ContentView: View {
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Explore Maine")
-    }.listStyle(PlainListStyle())
-    
-            
+    }
+    .listStyle(PlainListStyle())
+    .refreshable {
+        Task{
+            await model.makeOfflineMapModels()
+        }
+    }
     }
 }
 

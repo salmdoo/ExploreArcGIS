@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct DemoArcGISApp: App {
+    @State private var networkMonitor = NetworkMonitor.instance
+    
     var body: some Scene {
         WindowGroup {
-                ContentView()
+            ContentView()
+                .environmentObject(networkMonitor)
         }
     }
 }

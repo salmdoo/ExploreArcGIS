@@ -46,18 +46,22 @@ class MapModel {
         offlineMapModels = await Result {
             let offlineStoredMapTemp = try storageMap.loadAllMap()
             
-            let offlinePreplannedMap =
-            try await offlineMapTask.preplannedMapAreas
-                .compactMap {
-                    OfflinePreplannedMap(
-                        preplannedMapArea: $0,
-                        offlineMapTask: offlineMapTask,
-                        temporaryDirectory: temporaryDirectory,
-                        storageMap: storageMap
-                    )
-                    
-                }
-            let filtered = offlinePreplannedMap.filter { !offlineStoredMapTemp.map({ $0.title }).contains($0.title) }
+            var filtered: [MapItem] = []
+            
+            if NetworkMonitor.instance.isConnected {
+                let offlinePreplannedMap =
+                try await offlineMapTask.preplannedMapAreas
+                    .compactMap {
+                        OfflinePreplannedMap(
+                            preplannedMapArea: $0,
+                            offlineMapTask: offlineMapTask,
+                            temporaryDirectory: temporaryDirectory,
+                            storageMap: storageMap
+                        )
+                        
+                    }
+                filtered = offlinePreplannedMap.filter { !offlineStoredMapTemp.map({ $0.title }).contains($0.title) }
+            }
             return offlineStoredMapTemp + filtered
         }
     }
