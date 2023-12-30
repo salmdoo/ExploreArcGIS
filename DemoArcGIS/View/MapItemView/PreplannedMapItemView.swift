@@ -36,7 +36,7 @@ struct PreplannedMapItemView: View {
                             title: Text("Delete Confirmation"),
                             message: Text("Are you sure you want to delete this map?"),
                             primaryButton: .destructive(Text("Delete")) {
-                                offlineStored.removeDownloaded()
+                                offlineStored.removeMap()
                             },
                             secondaryButton: .cancel()
                         )

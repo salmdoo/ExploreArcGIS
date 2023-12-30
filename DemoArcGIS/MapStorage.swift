@@ -10,7 +10,7 @@ import ArcGIS
 
 
 protocol MapStorageProtocol {
-    func saveMap(map: OfflineStoredMap) throws
+    func saveMap(map: MapItem) throws
     func deleteMap(mapId: String) throws
     func loadAllMap() throws -> [MapItem]
     func loadMap(id: String) throws -> MapItem?
@@ -20,10 +20,15 @@ struct CoreDataMapStorage: MapStorageProtocol {
     private let persistent = PersistenceController.instance
     let temporaryDirectory: URL
     
-    func saveMap(map: OfflineStoredMap) throws {
+    func saveMap(map: MapItem) throws {
         let results = try persistent.fetchAllMaps()
         if results.filter({ $0.id == map.id }).first == nil {
-            try persistent.saveMap(map: map)
+            let mapSaved = MapOffline()
+            mapSaved.id = map.id
+            mapSaved.snippet = map.snippet
+            mapSaved.thumbnailUrl = map.thumbnailUrl
+            mapSaved.title = map.title
+            try persistent.saveMap(map: mapSaved)
         }
     }
     

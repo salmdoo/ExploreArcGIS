@@ -7,6 +7,7 @@
 
 import SwiftUI
 import ArcGIS
+import SDWebImageSwiftUI
 
 struct MapItemView: View {
     let model: MapItem
@@ -17,13 +18,16 @@ struct MapItemView: View {
     
     var body: some View {
         HStack {
-            AsyncImage(url: model.thumbnailUrl) { img in
-                img.resizable()
-                    .scaledToFit()
-            } placeholder: {
-                Image(systemName: "photo")
+            if let thumbnailUrl = model.thumbnailUrl {
+                WebImage(url: thumbnailUrl)
+                    .resizable()
+                    .placeholder(Image(systemName: "photo"))
+                    .placeholder {
+                        Rectangle().foregroundColor(.gray)
+                    }
+                    .scaledToFill()
+                    .frame(width: 100, height: 70, alignment: .center)
             }
-            .frame(width: 100, height: 100, alignment: .center)
             
             VStack (alignment: .leading) {
                 if let title = model.title  {

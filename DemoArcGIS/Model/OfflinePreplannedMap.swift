@@ -135,30 +135,5 @@ extension OfflinePreplannedMap {
         return parameters
     }
     
-    func loadStoredMap() -> MapItem? {
-        try? storageMap.loadMap(id: self.id)
-    }
 }
 
-extension FileManager {
-    /// Creates a temporary directory and returns the URL of the created directory.
-    static func createTemporaryDirectory() -> URL {
-        // swiftlint:disable:next force_try
-        try! FileManager.default.url(
-            for: .documentDirectory,
-            in: .userDomainMask,
-            appropriateFor: FileManager.default.temporaryDirectory,
-            create: true
-        )
-    }
-    
-    static func createMMPKTemporaryDirectory(temporaryDirectory: URL, fileName: String?) -> URL? {
-        if let fileName {
-           return temporaryDirectory
-                .appendingPathComponent(fileName)
-                .appendingPathExtension("mmpk")
-        } else {
-            return nil
-        }
-    }
-}

@@ -31,7 +31,7 @@ struct PersistenceController {
         return try context.fetch(fetchRequest)
     }
     
-     func saveMap(map: OfflineStoredMap) throws {
+     func saveMap(map: MapOffline) throws {
          let context = container.viewContext
          let mapSaved = MapOffline(context: context)
          mapSaved.title = map.title

@@ -30,7 +30,7 @@ class OfflineStoredMap: MapItem {
         return nil
     }
     
-    func removeDownloaded() {
+    func removeMap() {
         do{
             try mapStorage?.deleteMap(mapId: id)
             canViewDetails = false

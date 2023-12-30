@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		142463DD2B3FC60B00A646BF /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142463DC2B3FC60B00A646BF /* FileManager.swift */; };
+		142463E22B3FC77C00A646BF /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 142463E12B3FC77C00A646BF /* SDWebImageSwiftUI */; };
 		142EA7712B3D0A8E00F09AD7 /* PreplannedMapItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142EA7702B3D0A8E00F09AD7 /* PreplannedMapItemView.swift */; };
 		142EA7772B3E1B1B00F09AD7 /* MapStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142EA7762B3E1B1B00F09AD7 /* MapStorage.swift */; };
 		142EA77D2B3E363E00F09AD7 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142EA77C2B3E363E00F09AD7 /* Persistence.swift */; };
@@ -26,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		142463DC2B3FC60B00A646BF /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		142EA7702B3D0A8E00F09AD7 /* PreplannedMapItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreplannedMapItemView.swift; sourceTree = "<group>"; };
 		142EA7762B3E1B1B00F09AD7 /* MapStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStorage.swift; sourceTree = "<group>"; };
 		142EA77C2B3E363E00F09AD7 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -49,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				142463E22B3FC77C00A646BF /* SDWebImageSwiftUI in Frameworks */,
 				146FED372B34E2BF00C9A319 /* ArcGISToolkit in Frameworks */,
 				146FECF82B33E52D00C9A319 /* ArcGIS in Frameworks */,
 			);
@@ -81,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				145AE9402B3F211700DEA320 /* NetworkMonitor.swift */,
+				142463DC2B3FC60B00A646BF /* FileManager.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -161,6 +166,7 @@
 			packageProductDependencies = (
 				146FECF72B33E52D00C9A319 /* ArcGIS */,
 				146FED362B34E2BF00C9A319 /* ArcGISToolkit */,
+				142463E12B3FC77C00A646BF /* SDWebImageSwiftUI */,
 			);
 			productName = DemoArcGIS;
 			productReference = 146FECE52B33E49300C9A319 /* DemoArcGIS.app */;
@@ -193,6 +199,7 @@
 			packageReferences = (
 				146FECF62B33E52D00C9A319 /* XCRemoteSwiftPackageReference "arcgis-maps-sdk-swift" */,
 				146FED352B34E2BF00C9A319 /* XCRemoteSwiftPackageReference "arcgis-maps-sdk-swift-toolkit" */,
+				142463E02B3FC77C00A646BF /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 146FECE62B33E49300C9A319 /* Products */;
 			projectDirPath = "";
@@ -228,6 +235,7 @@
 				145AE93B2B3E68FF00DEA320 /* MapItem.swift in Sources */,
 				146FECEB2B33E49300C9A319 /* ContentView.swift in Sources */,
 				146FECE92B33E49300C9A319 /* DemoArcGISApp.swift in Sources */,
+				142463DD2B3FC60B00A646BF /* FileManager.swift in Sources */,
 				142EA7772B3E1B1B00F09AD7 /* MapStorage.swift in Sources */,
 				146FED392B34E6C800C9A319 /* MapItemView.swift in Sources */,
 				145AE93D2B3E73C000DEA320 /* OfflineStoredMap.swift in Sources */,
@@ -439,6 +447,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		142463E02B3FC77C00A646BF /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.6;
+			};
+		};
 		146FECF62B33E52D00C9A319 /* XCRemoteSwiftPackageReference "arcgis-maps-sdk-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Esri/arcgis-maps-sdk-swift";
@@ -458,6 +474,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		142463E12B3FC77C00A646BF /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 142463E02B3FC77C00A646BF /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
 		146FECF72B33E52D00C9A319 /* ArcGIS */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 146FECF62B33E52D00C9A319 /* XCRemoteSwiftPackageReference "arcgis-maps-sdk-swift" */;
