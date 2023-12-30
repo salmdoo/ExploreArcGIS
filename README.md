@@ -44,9 +44,10 @@
 2. The application prioritizes user-friendly interaction:
 * Map list refresh: Users can effortlessly update the map list by performing a downward swipe gesture.
 * Confirmation for map removal: The application ensures user confirmation before deleting a map.
-3. The application boasts a highly scalable architecture:
+3. The application boasts a highly scalable architecture and consistent data management:
 * Utilizes design patterns: Observer, Singleton, Dependency injection, SOLID, and Protocol Oriented Programming (POP).
 * Applied generic class: all maps are MapItem and the offline maps list can be Preplanned Map or Store Map, which is helpful to expand the Preplanned Map or Store Map if they have new specific behaviors.
+* The map area encompasses both un-downloaded preplanned maps and downloaded preplanned maps. When a user downloads a new preplanned map, it replaces the downloaded map, ensuring consistent behavior with a specific preplanned map.
 4. The application incorporates cutting-edge technologies:
 * Implementation of @Observable, a feature supported in iOS 17. 
 
@@ -62,4 +63,12 @@
 
 ## Class diagram:
  <img width="672" alt="Screenshot 2023-12-29 at 11 01 37 PM" src="https://github.com/salmdoo/ExploreArcGIS/assets/118146780/2306c4f0-c8c1-4732-a80a-8017c01b645f">
+
+**Class descriptions:**
+* MapItem: contains data for various map types displayed on the map list screen.
+* OnlineMap: stores web maps sourced from the ArcGIS map, accessible only when the device is connected to the network.
+* OfflinePreplannedMap: stores preplanned maps from ArcGIS, retrievable only when the device is connected to the network.
+* OfflineStoreMap: holds downloaded preplanned maps saved in the device's local storage, accessible without a network connection.
+* MapStorageProtocol: outlines common operations for local storage
+* CoreDataStorage: is an implementation of a specific type of local storage, utilizing the CoreData database for data management.
 
