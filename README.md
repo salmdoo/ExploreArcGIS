@@ -47,7 +47,7 @@
 3. The application boasts a highly scalable architecture and consistent data management:
 * Utilizes design patterns: Observer, Singleton, Dependency injection, SOLID, and Protocol Oriented Programming (POP).
 * Applied generic class: all maps are MapItem and the offline maps list can be Preplanned Map or Store Map, which is helpful to expand the Preplanned Map or Store Map if they have new specific behaviors.
-* The map area encompasses both un-downloaded preplanned maps and downloaded preplanned maps. When a user downloads a new preplanned map, it replaces the downloaded map, ensuring consistent behavior with a specific preplanned map.
+* The map area encompasses both un-downloaded preplanned maps and downloaded preplanned maps. When a user downloads a new preplanned map, it is replaced by a downloaded map, ensuring consistent behavior with a specific preplanned map.
 4. The application incorporates cutting-edge technologies:
 * Implementation of @Observable, a feature supported in iOS 17. 
 
