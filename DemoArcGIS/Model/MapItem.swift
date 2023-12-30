@@ -46,9 +46,6 @@ class MapItem: Identifiable {
 }
 
 class OnlineMap: MapItem {
-    lazy var map: Map? = {
-        portalItem != nil ? Map(item: portalItem!) : nil
-    }()
     
     init(portalItem: PortalItem) {
         super.init(portalItem: portalItem)

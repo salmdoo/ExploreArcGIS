@@ -13,10 +13,6 @@ struct PreplannedMapItemView: View {
     var model: MapItem
     @State private var clickDelete: Bool = false
     
-//    init(model: MapItem) {
-//        self.model = model
-//    }
-    
     var body: some View {
         HStack {
             if let offlineStored = model as? OfflineStoredMap {
@@ -80,9 +76,6 @@ struct PreplannedMapItemView: View {
                         Button(action: {
                             Task {
                                 await offlineModel.download()
-//                                if let storedMap = offlineModel.loadStoredMap() {
-//                                    model = storedMap
-//                                }
                             }
                         }, label: {
                             Image(systemName: "icloud.and.arrow.down")

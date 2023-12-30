@@ -11,8 +11,11 @@ import ArcGIS
 
 struct ContentView: View {
     
-    @State private var model = MapModel()
-    @EnvironmentObject var networkMonitor: NetworkMonitor
+    @State private var model: MapModel
+    
+    init(model: MapModel) {
+        self.model = model
+    }
     
     var body: some View {
         NavigationView {
@@ -66,7 +69,6 @@ struct MapDetailsView: View {
     var body: some View {
         if let data = mapData {
             MapView(map: data)
-                
         } else {
            Image(systemName: "rays")
             .onAppear() {
@@ -78,6 +80,3 @@ struct MapDetailsView: View {
     }
 }
 
-#Preview {
-    ContentView()
-}

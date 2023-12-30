@@ -135,15 +135,6 @@ extension OfflinePreplannedMap {
         return parameters
     }
     
-    /// Cancels current download.
-    func cancelDownloading() async {
-        guard let job else {
-            return
-        }
-        await job.cancel()
-        self.job = nil
-    }
-    
     func loadStoredMap() -> MapItem? {
         try? storageMap.loadMap(id: self.id)
     }

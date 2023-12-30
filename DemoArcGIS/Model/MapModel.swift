@@ -14,7 +14,7 @@ import ArcGIS
 class MapModel {
     
     /// A portal item displaying the Explore Maine
-     let portalItem = PortalItem.exploreMaine()
+    private let portalItem: PortalItem
     
     var onlineMapModel: MapItem? = nil
     
@@ -27,10 +27,11 @@ class MapModel {
 
     private let storageMap: MapStorageProtocol
     
-    init() {
+    init(storageMap: MapStorageProtocol, portalId: String, temporaryDirectory: URL) {
+        self.portalItem = PortalItem.exploreMaine(id: portalId)
         // Creates temp directory.
-        temporaryDirectory = FileManager.createTemporaryDirectory()
-        storageMap = CoreDataMapStorage(temporaryDirectory: temporaryDirectory)
+        self.temporaryDirectory = temporaryDirectory
+        self.storageMap = storageMap
         
         // Initializes the online map and offline map task.
         offlineMapTask = OfflineMapTask(portalItem: portalItem)
@@ -95,9 +96,9 @@ class MapModel {
 
 //fileprivate
  extension PortalItem {
-    static func exploreMaine() -> PortalItem {
+     static func exploreMaine(id: String) -> PortalItem {
         PortalItem(portal: .arcGISOnline(connection: .anonymous),
-                   id: PortalItem.ID("3bc3179f17da44a0ac0bfdac4ad15664")!)
+                   id: PortalItem.ID(id)!)
     }
 }
 
