@@ -33,13 +33,9 @@ struct PersistenceController {
     
      func saveMap(map: MapOffline) throws {
          let context = container.viewContext
-         let mapSaved = MapOffline(context: context)
-         mapSaved.title = map.title
-         mapSaved.id = map.id
-         mapSaved.snippet = map.snippet
-         mapSaved.thumbnailUrl = map.thumbnailUrl
-         
-         try context.save()
+         if context.hasChanges {
+             try context.save()
+         }
     }
     
     func deleteMap(id: String) throws {

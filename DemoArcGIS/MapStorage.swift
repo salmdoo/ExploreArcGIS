@@ -23,7 +23,7 @@ struct CoreDataMapStorage: MapStorageProtocol {
     func saveMap(map: MapItem) throws {
         let results = try persistent.fetchAllMaps()
         if results.filter({ $0.id == map.id }).first == nil {
-            let mapSaved = MapOffline()
+            let mapSaved = MapOffline(context: persistent.container.viewContext)
             mapSaved.id = map.id
             mapSaved.snippet = map.snippet
             mapSaved.thumbnailUrl = map.thumbnailUrl

@@ -24,14 +24,17 @@ class MapModel {
     private let temporaryDirectory: URL
 
     var offlineMapModels: Result<[MapItem], Error>?
+    var loading = false
 
     private let storageMap: MapStorageProtocol
+    private(set) var networkMonitor: NetworkMonitor
     
-    init(storageMap: MapStorageProtocol, portalId: String, temporaryDirectory: URL) {
+    init(storageMap: MapStorageProtocol, portalId: String, temporaryDirectory: URL, networkMonitor: NetworkMonitor) {
         self.portalItem = PortalItem.exploreMaine(id: portalId)
         // Creates temp directory.
         self.temporaryDirectory = temporaryDirectory
         self.storageMap = storageMap
+        self.networkMonitor = networkMonitor
         
         // Initializes the online map and offline map task.
         offlineMapTask = OfflineMapTask(portalItem: portalItem)
@@ -43,7 +46,7 @@ class MapModel {
     
     func loadMaps() async {
         
-        if NetworkMonitor.instance.isConnected {
+        if self.networkMonitor.isConnected {
             onlineMapModel = OnlineMap(portalItem: portalItem)
         } else { onlineMapModel = nil }
         
@@ -52,7 +55,8 @@ class MapModel {
             
             var filtered: [MapItem] = []
             
-            if NetworkMonitor.instance.isConnected {
+            if self.networkMonitor.isConnected {
+                loading = true
                 let offlinePreplannedMap =
                 try await offlineMapTask.preplannedMapAreas
                     .compactMap {
@@ -66,7 +70,9 @@ class MapModel {
                         
                     }
                 filtered = offlinePreplannedMap.filter { !offlineStoredMapTemp.map({ $0.id }).contains($0.id) }
+                loading = false
             }
+            
              return offlineStoredMapTemp + filtered
         }
     }

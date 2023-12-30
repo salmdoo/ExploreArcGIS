@@ -33,25 +33,33 @@ struct ContentView: View {
                     }
                 }
                 
-                if let preplannedMaps = model.offlineMapModels {
-                    Section {
-                        switch preplannedMaps {
-                        case .success(let maps):
-                            ForEach (maps.indices, id: \.self) {idx in
-                                PreplannedMapItemView(model: maps[idx])
-                            }
-                        case .failure (let error):
-                            Text(error.localizedDescription)
-                        }
-                    } header: {
-                        Text("Map Areas")
-                            .bold()
+                Section {
+                    if model.loading {
+                        Text("Loading preplanned map ...")
+                            .font(.caption)
                     }
-                    
+                    switch model.offlineMapModels {
+                    case .success(let maps):
+                        ForEach (maps.indices, id: \.self) {idx in
+                            PreplannedMapItemView(model: maps[idx])
+                        }
+                    case .failure (let error):
+                        Text(error.localizedDescription)
+                    case .none:
+                        EmptyView()
+                    }
+                } header: {
+                    Text("Map Areas")
+                        .bold()
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Explore Maine")
+            .onChange(of: model.networkMonitor.isConnected, {
+                Task {
+                   await model.loadMaps()
+                }
+            })
     }
     .listStyle(PlainListStyle())
     .refreshable {

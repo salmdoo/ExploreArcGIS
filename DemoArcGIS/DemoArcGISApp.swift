@@ -16,8 +16,8 @@ struct DemoArcGISApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView(model: MapModel(storageMap: CoreDataMapStorage(temporaryDirectory: temporaryDirectory),
-                                        portalId: "3bc3179f17da44a0ac0bfdac4ad15664", temporaryDirectory: temporaryDirectory))
-                .environmentObject(networkMonitor)
+                                        portalId: "3bc3179f17da44a0ac0bfdac4ad15664", temporaryDirectory: temporaryDirectory, networkMonitor: networkMonitor))
+//                .environment(networkMonitor)
         }
     }
 }

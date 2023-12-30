@@ -8,7 +8,8 @@
 import Foundation
 import Network
 
-class NetworkMonitor: ObservableObject {
+@Observable
+class NetworkMonitor {
     static let instance = NetworkMonitor()
     private let networkMonitor = NWPathMonitor()
     private let workerQueue = DispatchQueue(label: "NetworkMonitor")
