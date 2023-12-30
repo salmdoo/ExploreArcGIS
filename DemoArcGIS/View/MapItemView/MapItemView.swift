@@ -38,6 +38,7 @@ struct MapItemView: View {
                 }
             }
         }.frame(maxHeight: 100)
+            .foregroundColor(.black)
     }
 }
 

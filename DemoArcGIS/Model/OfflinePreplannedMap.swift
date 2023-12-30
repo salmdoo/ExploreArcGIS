@@ -32,7 +32,7 @@ final class OfflinePreplannedMap: MapItem {
     private let storageMap: MapStorageProtocol
     private let temporaryDirectory: URL
     
-    init?(preplannedMapArea: PreplannedMapArea, offlineMapTask: OfflineMapTask, temporaryDirectory: URL, storageMap: MapStorageProtocol) {
+    init?(preplannedMapArea: PreplannedMapArea, offlineMapTask: OfflineMapTask, temporaryDirectory: URL, storageMap: MapStorageProtocol, model: MapModel?) {
         self.preplannedMapArea = preplannedMapArea
         self.offlineMapTask = offlineMapTask
         self.storageMap = storageMap
@@ -46,13 +46,14 @@ final class OfflinePreplannedMap: MapItem {
             return nil
         }
         
-        super.init(portalItem: preplannedMapArea.portalItem)
+        super.init(portalItem: preplannedMapArea.portalItem, model: model)
     }
     
     deinit {
         Task { [job] in
             // Cancel any outstanding job.
             await job?.cancel()
+           
         }
     }
 }
@@ -66,7 +67,7 @@ extension OfflinePreplannedMap {
 }
 
 @MainActor
-extension OfflinePreplannedMap: OfflineMapProtocol {
+extension OfflinePreplannedMap {
     
     /// Downloads the given preplanned map area.
     /// - Parameter preplannedMapArea: The preplanned map area to be downloaded.
@@ -99,7 +100,9 @@ extension OfflinePreplannedMap: OfflineMapProtocol {
         result = await self.job?.result.map { $0.mobileMapPackage }
         
         // Save map to local
-        try? storageMap.saveMap(map: OfflineStoredMap(map: self, mapStorage: storageMap))
+        let storedMap = OfflineStoredMap(map: self, mapStorage: storageMap, temporaryDirectory: self.temporaryDirectory)
+        try? storageMap.saveMap(map: storedMap)
+        model?.replaceOfflineMap(map: storedMap)
         
         // Sets the job to nil
         self.job = nil
@@ -141,21 +144,8 @@ extension OfflinePreplannedMap: OfflineMapProtocol {
         self.job = nil
     }
     
-    /// Removes the downloaded offline map (mmpk) from disk.
-    nonisolated func removeDownloaded() {
-        result = nil
-        try? FileManager.default.removeItem(at: mmpkDirectory)
-        try? storageMap.deleteMap(mapId: self.id)
-    }
-    
-    func loadDownloaded() -> Map? {
-        if downloadDidSucceed {
-            if case .success(let mmpk) = result {
-                // If we have already downloaded, then open the map in the mmpk.
-                return mmpk.maps.first
-            }
-        }
-        return nil
+    func loadStoredMap() -> MapItem? {
+        try? storageMap.loadMap(id: self.id)
     }
 }
 

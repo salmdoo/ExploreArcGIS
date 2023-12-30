@@ -13,6 +13,7 @@ protocol MapStorageProtocol {
     func saveMap(map: OfflineStoredMap) throws
     func deleteMap(mapId: String) throws
     func loadAllMap() throws -> [MapItem]
+    func loadMap(id: String) throws -> MapItem?
 }
 
 struct CoreDataMapStorage: MapStorageProtocol {
@@ -20,7 +21,10 @@ struct CoreDataMapStorage: MapStorageProtocol {
     let temporaryDirectory: URL
     
     func saveMap(map: OfflineStoredMap) throws {
-        try persistent.saveMap(map: map)
+        let results = try persistent.fetchAllMaps()
+        if results.filter({ $0.id == map.id }).first == nil {
+            try persistent.saveMap(map: map)
+        }
     }
     
     func deleteMap(mapId: String) throws {
@@ -30,6 +34,14 @@ struct CoreDataMapStorage: MapStorageProtocol {
     func loadAllMap() throws -> [MapItem] {
         let results = try persistent.fetchAllMaps()
         return results.compactMap { OfflineStoredMap(offlineModel: $0, mapStorage: self, temporaryDirectory: temporaryDirectory)}
+    }
+    
+    func loadMap(id: String) throws -> MapItem? {
+        let results = try persistent.fetchAllMaps()
+        if let item = results.filter({ $0.id == id }).first {
+            return OfflineStoredMap(offlineModel: item, mapStorage: self, temporaryDirectory: temporaryDirectory)
+        }
+        return nil
     }
     
     

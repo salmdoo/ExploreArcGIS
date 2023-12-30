@@ -8,19 +8,23 @@
 import Foundation
 import ArcGIS
 
+@Observable
 class MapItem: Identifiable {
+    weak var model: MapModel?
+    
     var portalItem: PortalItem? = nil
     private(set) var id : String
     let thumbnailUrl: URL?
     let title: String?
     let snippet: String?
     
-    init(portalItem: PortalItem) {
+    init(portalItem: PortalItem, model: MapModel? = nil) {
         self.portalItem = portalItem
         self.thumbnailUrl = portalItem.thumbnail?.url
         self.title = portalItem.title
         self.snippet = portalItem.snippet
         self.id = portalItem.id?.rawValue ?? UUID().uuidString
+        self.model = model
     }
     
     init(id: String? = nil, thumbnailUrl: URL?, title: String?, snippet: String?) {
@@ -35,6 +39,10 @@ class MapItem: Identifiable {
                             title: "Bonston Circle",
                             snippet: "It lies on Massachusetts Bay, an arm of the Atlantic Ocean. The city proper has an unusually small area for a major city")
     }
+    
+    func loadMap() async -> Map? {
+        portalItem != nil ? Map(item: portalItem!) : nil
+    }
 }
 
 class OnlineMap: MapItem {
@@ -42,13 +50,8 @@ class OnlineMap: MapItem {
         portalItem != nil ? Map(item: portalItem!) : nil
     }()
     
-    override init(portalItem: PortalItem) {
+    init(portalItem: PortalItem) {
         super.init(portalItem: portalItem)
     }
-}
-
-protocol OfflineMapProtocol {
-    func loadDownloaded() async -> Map?
-    func removeDownloaded()
 }
 

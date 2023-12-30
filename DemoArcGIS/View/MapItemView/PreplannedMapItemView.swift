@@ -11,34 +11,40 @@ import ArcGIS
 struct PreplannedMapItemView: View {
     
     var model: MapItem
-
-    @State var downloadedMap: Map?
+    @State private var clickDelete: Bool = false
+    
+//    init(model: MapItem) {
+//        self.model = model
+//    }
+    
     var body: some View {
         HStack {
             if let offlineStored = model as? OfflineStoredMap {
                 NavigationLink {
-                    if let downloadedMap {
-                        WebMapView(map: downloadedMap)
-                    }
+                    MapDetailsView(map: model)
+                   
                 } label: {
                     MapItemView(model: model)
-                        .foregroundColor(.black)
                 }.disabled(!offlineStored.canViewDetails)
-                .onAppear(){
-                    Task {
-                        downloadedMap = await offlineStored.loadDownloaded()
-                    }
-                }
                 Spacer()
                 switch offlineStored.result {
                 case .none:
                     Button(action: {
-                        offlineStored.removeDownloaded()
+                        clickDelete = true
                     }, label: {
                         Image(systemName: "trash")
                             .iconBackground()
                             .foregroundColor(.red)
-                    })
+                    }).alert(isPresented: $clickDelete) {
+                        Alert(
+                            title: Text("Delete Confirmation"),
+                            message: Text("Are you sure you want to delete this map?"),
+                            primaryButton: .destructive(Text("Delete")) {
+                                offlineStored.removeDownloaded()
+                            },
+                            secondaryButton: .cancel()
+                        )
+                    }
                 case .success(_ ):
                     Image(systemName: "eye.trianglebadge.exclamationmark")
                         .iconBackground()
@@ -47,19 +53,11 @@ struct PreplannedMapItemView: View {
                         .iconBackground()
                         .foregroundColor(.red)
                 }
-
             }
             
             
             if let offlineModel = model as? OfflinePreplannedMap {
-                NavigationLink {
-                    if offlineModel.downloadDidSucceed {
-                        WebMapView(map: offlineModel.loadDownloaded())
-                    }
-                } label: {
-                    MapItemView(model: model)
-                        .foregroundColor(.black)
-                }.disabled(!offlineModel.downloadDidSucceed)
+                MapItemView(model: model)
                 
                 Spacer()
             
@@ -73,13 +71,7 @@ struct PreplannedMapItemView: View {
                     
                     switch offlineModel.result {
                     case .success:
-                        Button(action: {
-                            offlineModel.removeDownloaded()
-                        }, label: {
-                            Image(systemName: "trash")
-                                .iconBackground()
-                                .foregroundColor(.red)
-                        })
+                        EmptyView()
                     case .failure:
                         Image(systemName: "exclamationmark.circle")
                             .iconBackground()
@@ -88,6 +80,9 @@ struct PreplannedMapItemView: View {
                         Button(action: {
                             Task {
                                 await offlineModel.download()
+//                                if let storedMap = offlineModel.loadStoredMap() {
+//                                    model = storedMap
+//                                }
                             }
                         }, label: {
                             Image(systemName: "icloud.and.arrow.down")
@@ -95,7 +90,6 @@ struct PreplannedMapItemView: View {
                                 .foregroundColor(.black)
                         })
                     }
-                    
                     
                 }
             }

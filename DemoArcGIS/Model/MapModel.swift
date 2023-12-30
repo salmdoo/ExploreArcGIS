@@ -16,33 +16,36 @@ class MapModel {
     /// A portal item displaying the Explore Maine
      let portalItem = PortalItem.exploreMaine()
     
-    var webmapOnline: MapItem
+    var onlineMapModel: MapItem? = nil
     
     private let offlineMapTask: OfflineMapTask
     
     // A URL to a temporary directory where the downloaded map packages are stored.
     private let temporaryDirectory: URL
 
-    private(set) var offlineMapModels: Result<[MapItem], Error>?
+    var offlineMapModels: Result<[MapItem], Error>?
 
     private let storageMap: MapStorageProtocol
     
     init() {
-        
-        
         // Creates temp directory.
         temporaryDirectory = FileManager.createTemporaryDirectory()
         storageMap = CoreDataMapStorage(temporaryDirectory: temporaryDirectory)
         
         // Initializes the online map and offline map task.
         offlineMapTask = OfflineMapTask(portalItem: portalItem)
-        webmapOnline = OnlineMap(portalItem: portalItem)
+        
         Task {
-            await makeOfflineMapModels()
+            await loadMaps()
         }
     }
     
-    func makeOfflineMapModels() async {
+    func loadMaps() async {
+        
+        if NetworkMonitor.instance.isConnected {
+            onlineMapModel = OnlineMap(portalItem: portalItem)
+        } else { onlineMapModel = nil }
+        
         offlineMapModels = await Result {
             let offlineStoredMapTemp = try storageMap.loadAllMap()
             
@@ -56,14 +59,32 @@ class MapModel {
                             preplannedMapArea: $0,
                             offlineMapTask: offlineMapTask,
                             temporaryDirectory: temporaryDirectory,
-                            storageMap: storageMap
+                            storageMap: storageMap,
+                            model: self
                         )
                         
                     }
-                filtered = offlinePreplannedMap.filter { !offlineStoredMapTemp.map({ $0.title }).contains($0.title) }
+                filtered = offlinePreplannedMap.filter { !offlineStoredMapTemp.map({ $0.id }).contains($0.id) }
             }
-            return offlineStoredMapTemp + filtered
+             return offlineStoredMapTemp + filtered
         }
+    }
+    
+    func replaceOfflineMap(map: MapItem) {
+        switch offlineMapModels {
+        case .success(var maps):
+            for (idx, val) in maps.enumerated() {
+                if val.id == map.id {
+                    maps[idx] = map
+                }
+            }
+            offlineMapModels = Result.success(maps)
+        case .failure( let error):
+            offlineMapModels = Result.failure(error)
+        case .none:
+            print("Do nothing")
+        }
+        
     }
     
     deinit {

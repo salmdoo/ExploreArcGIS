@@ -20,7 +20,6 @@
 		146FECED2B33E49400C9A319 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146FECEC2B33E49400C9A319 /* Assets.xcassets */; };
 		146FECF02B33E49400C9A319 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146FECEF2B33E49400C9A319 /* Preview Assets.xcassets */; };
 		146FECF82B33E52D00C9A319 /* ArcGIS in Frameworks */ = {isa = PBXBuildFile; productRef = 146FECF72B33E52D00C9A319 /* ArcGIS */; };
-		146FECFA2B33ED8000C9A319 /* WebMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146FECF92B33ED8000C9A319 /* WebMapView.swift */; };
 		146FED222B34A8C400C9A319 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146FED212B34A8C400C9A319 /* MapModel.swift */; };
 		146FED242B34A9CB00C9A319 /* OfflinePreplannedMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146FED232B34A9CB00C9A319 /* OfflinePreplannedMap.swift */; };
 		146FED372B34E2BF00C9A319 /* ArcGISToolkit in Frameworks */ = {isa = PBXBuildFile; productRef = 146FED362B34E2BF00C9A319 /* ArcGISToolkit */; };
@@ -42,7 +41,6 @@
 		146FECEA2B33E49300C9A319 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		146FECEC2B33E49400C9A319 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		146FECEF2B33E49400C9A319 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		146FECF92B33ED8000C9A319 /* WebMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebMapView.swift; sourceTree = "<group>"; };
 		146FED212B34A8C400C9A319 /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
 		146FED232B34A9CB00C9A319 /* OfflinePreplannedMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflinePreplannedMap.swift; sourceTree = "<group>"; };
 		146FED382B34E6C800C9A319 /* MapItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapItemView.swift; sourceTree = "<group>"; };
@@ -61,13 +59,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		142EA77B2B3E360E00F09AD7 /* CoreData */ = {
+		142463D82B3F605D00A646BF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				145AE9392B3E5CF400DEA320 /* MapItemView */,
+				146FECEA2B33E49300C9A319 /* ContentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		142463D92B3F609600A646BF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				146FED212B34A8C400C9A319 /* MapModel.swift */,
+				146FED232B34A9CB00C9A319 /* OfflinePreplannedMap.swift */,
+				145AE93C2B3E73C000DEA320 /* OfflineStoredMap.swift */,
+				145AE93A2B3E68FF00DEA320 /* MapItem.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		142463DA2B3F60C700A646BF /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				145AE9402B3F211700DEA320 /* NetworkMonitor.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		142EA77B2B3E360E00F09AD7 /* LocalStorage */ = {
 			isa = PBXGroup;
 			children = (
 				142EA77C2B3E363E00F09AD7 /* Persistence.swift */,
+				142EA7762B3E1B1B00F09AD7 /* MapStorage.swift */,
 				142EA77E2B3E383F00F09AD7 /* MapDataModel.xcdatamodeld */,
 			);
-			name = CoreData;
+			name = LocalStorage;
 			sourceTree = "<group>";
 		};
 		145AE9392B3E5CF400DEA320 /* MapItemView */ = {
@@ -99,19 +126,13 @@
 		146FECE72B33E49300C9A319 /* DemoArcGIS */ = {
 			isa = PBXGroup;
 			children = (
-				142EA77B2B3E360E00F09AD7 /* CoreData */,
-				146FECF92B33ED8000C9A319 /* WebMapView.swift */,
-				146FED212B34A8C400C9A319 /* MapModel.swift */,
-				146FED232B34A9CB00C9A319 /* OfflinePreplannedMap.swift */,
-				145AE93C2B3E73C000DEA320 /* OfflineStoredMap.swift */,
-				145AE93A2B3E68FF00DEA320 /* MapItem.swift */,
-				146FECEA2B33E49300C9A319 /* ContentView.swift */,
+				142463DA2B3F60C700A646BF /* Utility */,
+				142463D92B3F609600A646BF /* Model */,
+				142463D82B3F605D00A646BF /* View */,
+				142EA77B2B3E360E00F09AD7 /* LocalStorage */,
 				146FECE82B33E49300C9A319 /* DemoArcGISApp.swift */,
-				145AE9392B3E5CF400DEA320 /* MapItemView */,
-				142EA7762B3E1B1B00F09AD7 /* MapStorage.swift */,
 				146FECEC2B33E49400C9A319 /* Assets.xcassets */,
 				146FECEE2B33E49400C9A319 /* Preview Content */,
-				145AE9402B3F211700DEA320 /* NetworkMonitor.swift */,
 			);
 			path = DemoArcGIS;
 			sourceTree = "<group>";
@@ -211,7 +232,6 @@
 				145AE93B2B3E68FF00DEA320 /* MapItem.swift in Sources */,
 				146FECEB2B33E49300C9A319 /* ContentView.swift in Sources */,
 				146FECE92B33E49300C9A319 /* DemoArcGISApp.swift in Sources */,
-				146FECFA2B33ED8000C9A319 /* WebMapView.swift in Sources */,
 				142EA7772B3E1B1B00F09AD7 /* MapStorage.swift in Sources */,
 				146FED392B34E6C800C9A319 /* MapItemView.swift in Sources */,
 				145AE93D2B3E73C000DEA320 /* OfflineStoredMap.swift in Sources */,
@@ -274,7 +294,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -331,7 +351,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -349,6 +369,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DemoArcGIS/Preview Content\"";
+				DEVELOPMENT_TEAM = 39PM9B927M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -377,6 +398,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DemoArcGIS/Preview Content\"";
+				DEVELOPMENT_TEAM = 39PM9B927M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

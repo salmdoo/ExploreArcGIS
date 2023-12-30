@@ -9,15 +9,14 @@ import Foundation
 import ArcGIS
 
 @Observable
-class OfflineStoredMap: MapItem, OfflineMapProtocol {
+class OfflineStoredMap: MapItem {
     
     private let mapStorage: MapStorageProtocol?
     private var mmpkDirectory: URL? = nil
     private(set) var result: Result<Bool, Error>?
     private(set) var canViewDetails = true
     
-    @MainActor
-    func loadDownloaded() async -> Map? {
+    override func loadMap() async -> Map? {
         if let fileURL = mmpkDirectory {
             
             let mapPackage = MobileMapPackage(fileURL: fileURL)
@@ -50,8 +49,9 @@ class OfflineStoredMap: MapItem, OfflineMapProtocol {
         super.init(id: offlineModel.id, thumbnailUrl: offlineModel.thumbnailUrl, title: offlineModel.title, snippet: offlineModel.snippet)
     }
     
-    init(map: OfflinePreplannedMap, mapStorage: MapStorageProtocol) {
+    init(map: OfflinePreplannedMap, mapStorage: MapStorageProtocol, temporaryDirectory: URL) {
         self.mapStorage = mapStorage
+        self.mmpkDirectory = FileManager.createMMPKTemporaryDirectory(temporaryDirectory: temporaryDirectory, fileName: map.id)
         super.init(portalItem: map.preplannedMapArea.portalItem)
     }
     

@@ -17,16 +17,12 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                if networkMonitor.isConnected {
+                if let onlineMap = model.onlineMapModel as? OnlineMap, let item = onlineMap.portalItem {
                     Section {
-                        if
-                            let onlineMap = model.webmapOnline as? OnlineMap {
-                            NavigationLink {
-                                WebMapView(map: onlineMap.map)
-                            } label: {
-                                MapItemView(model: MapItem(thumbnailUrl: model.portalItem.thumbnail?.url, title: model.portalItem.title, snippet: model.portalItem.snippet))
-                                    .foregroundColor(.black)
-                            }
+                        NavigationLink {
+                            MapDetailsView(map: onlineMap)
+                        } label: {
+                            MapItemView(model: MapItem(portalItem: item))
                         }
                     } header: {
                         Text("Web View")
@@ -38,8 +34,8 @@ struct ContentView: View {
                     Section {
                         switch preplannedMaps {
                         case .success(let maps):
-                            ForEach (maps) {mapItem in
-                                PreplannedMapItemView(model: mapItem)
+                            ForEach (maps.indices, id: \.self) {idx in
+                                PreplannedMapItemView(model: maps[idx])
                             }
                         case .failure (let error):
                             Text(error.localizedDescription)
@@ -57,9 +53,28 @@ struct ContentView: View {
     .listStyle(PlainListStyle())
     .refreshable {
         Task{
-            await model.makeOfflineMapModels()
+            await model.loadMaps()
         }
     }
+    }
+}
+
+struct MapDetailsView: View {
+    let map: MapItem?
+    @State private var mapData: Map? = nil
+    
+    var body: some View {
+        if let data = mapData {
+            MapView(map: data)
+                
+        } else {
+           Image(systemName: "rays")
+            .onAppear() {
+                Task {
+                    mapData = await map?.loadMap()
+                }
+            }
+        }
     }
 }
 

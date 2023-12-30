@@ -29,15 +29,6 @@ struct PersistenceController {
     func fetchAllMaps() throws -> [MapOffline]  {
         let context = container.viewContext
         return try context.fetch(fetchRequest)
-        
-//        do {
-//            let results = try context.fetch(fetchRequest)
-//            return Result {
-//                results.compactMap { OfflineStoredMap(offlineModel: $0) }
-//            }
-//        } catch {
-//            return .failure(error)
-//        }
     }
     
      func saveMap(map: OfflineStoredMap) throws {
