@@ -36,13 +36,29 @@
 | <kbd>![Simulator Screenshot - iPhone 15 Pro - 2023-12-29 at 22 10 29](https://github.com/salmdoo/ExploreArcGIS/assets/118146780/915013ba-3454-4eef-8e5a-17131aed0d9c)</kbd>|<kbd> ![Simulator Screenshot - iPhone 15 Pro - 2023-12-29 at 22 10 36](https://github.com/salmdoo/ExploreArcGIS/assets/118146780/992a255f-4772-4bf3-8345-df272260641b)</kbd>|
 
 ## Non-Functional Requirement:
-The application must allow users to view and open previously downloaded map areas seamlessly, even when launched without a network connection.
+1. The application allows users to view and open previously downloaded map areas seamlessly, even when launched without a network connection.
 * **Technique Applied:**
   * Employing NWPathMonitor for observing and responding to network changes.
   * Utilizing the Observer pattern to subscribe to network status updates.
   * This triggers the map-loading function to dynamically reflect the map based on the current network status.
+2. The application prioritizes user-friendly interaction:
+* Map list refresh: Users can effortlessly update the map list by performing a downward swipe gesture.
+* Confirmation for map removal: The application ensures user confirmation before deleting a map.
+3. The application boasts a highly scalable architecture:
+* Utilizes design patterns: Observer, Singleton, Dependency injection, SOLID, and Protocol Oriented Programming (POP).
+* Applied generic class: all maps are MapItem and the offline maps list can be Preplanned Map or Store Map, which is helpful to expand the Preplanned Map or Store Map if they have new specific behaviors.
+4. The application incorporates cutting-edge technologies:
+* Implementation of @Observable, a feature supported in iOS 17. 
+
+
 ## Architecture overview:
-![Untitled Diagram drawio](https://github.com/salmdoo/ExploreArcGIS/assets/118146780/822463ec-39d4-43f6-8fa4-66f3faa27050)
+![Untitled Diagram drawio](https://github.com/salmdoo/ExploreArcGIS/assets/118146780/5dbcd631-6cc9-47fa-87d1-6fad00ce5183)
+* The application displays both the web map and preplanned maps sourced from the **ArcGIS APIs**.
+* Users have the capability to download preplanned maps:
+  * The metadata, including map name, thumbnail URL, and snippet, is stored locally using technologies such as Core Data, Realm, or SQLite. **Core Data** is specifically implemented in this application.
+  * The .mmpk map file is saved on the local device and managed through **File Management.**
+  * The map thumbnail image is stored locally and managed by third-party tools like SDWebImage or Kingfisher, with **SDWebImageSwiftUI** being the chosen implementation in the application.
+* To facilitate offline access, the application loads downloaded maps from local storage using **NSPersistentContainer and NSFetchRequest.**
 
 ## Class diagram:
  <img width="672" alt="Screenshot 2023-12-29 at 11 01 37 PM" src="https://github.com/salmdoo/ExploreArcGIS/assets/118146780/2306c4f0-c8c1-4732-a80a-8017c01b645f">
