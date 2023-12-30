@@ -1,4 +1,4 @@
-## Show WebMap and Preplanned Map 
+## Objective 
 * Build an iOS app using the ArcGIS Maps SDK for Swift (https://developers.arcgis.com/swift/) that works with preplanned map areas.
 * Use the webmap, "Explore Maine", with the item id 3bc3179f17da44a0ac0bfdac4ad15664 (https://www.arcgis.com/home/item.html?id=3bc3179f17da44a0ac0bfdac4ad15664)
 
@@ -37,4 +37,13 @@
 
 ## Non-Functional Requirement:
 The application must allow users to view and open previously downloaded map areas seamlessly, even when launched without a network connection.
-Technique Applied: Employing NWPathMonitor for observing and responding to network changes, utilizing the Observer pattern to subscribe to network status updates. This triggers the map-loading function to dynamically reflect the map based on the current network status.
+* **Technique Applied:**
+  * Employing NWPathMonitor for observing and responding to network changes.
+  * Utilizing the Observer pattern to subscribe to network status updates.
+  * This triggers the map-loading function to dynamically reflect the map based on the current network status.
+## Architecture overview:
+![Untitled Diagram drawio](https://github.com/salmdoo/ExploreArcGIS/assets/118146780/822463ec-39d4-43f6-8fa4-66f3faa27050)
+
+## Class diagram:
+ <img width="672" alt="Screenshot 2023-12-29 at 11 01 37 PM" src="https://github.com/salmdoo/ExploreArcGIS/assets/118146780/2306c4f0-c8c1-4732-a80a-8017c01b645f">
+
