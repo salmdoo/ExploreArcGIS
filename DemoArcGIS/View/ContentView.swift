@@ -61,7 +61,6 @@ struct ContentView: View {
                 }
             })
     }
-    .listStyle(PlainListStyle())
     .refreshable {
         Task{
             await model.loadMaps()
