@@ -59,6 +59,7 @@ class MapModel {
                 loading = true
                 let offlinePreplannedMap =
                 try await offlineMapTask.preplannedMapAreas
+                    .sorted(using:KeyPathComparator(\.portalItem.title))
                     .compactMap {
                         OfflinePreplannedMap(
                             preplannedMapArea: $0,

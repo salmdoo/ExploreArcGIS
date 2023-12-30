@@ -20,52 +20,55 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                if let onlineMap = model.onlineMapModel as? OnlineMap, let item = onlineMap.portalItem {
+                LazyVStack (alignment: .leading) {
+                    if let onlineMap = model.onlineMapModel as? OnlineMap, let item = onlineMap.portalItem {
+                        Section {
+                            NavigationLink {
+                                MapDetailsView(map: onlineMap)
+                            } label: {
+                                MapItemView(model: MapItem(portalItem: item))
+                            }
+                        } header: {
+                            Text("Web View")
+                                .bold()
+                        }
+                    }
+                    
                     Section {
-                        NavigationLink {
-                            MapDetailsView(map: onlineMap)
-                        } label: {
-                            MapItemView(model: MapItem(portalItem: item))
+                        if model.loading {
+                            Text("Loading preplanned map ...")
+                                .font(.caption)
+                        }
+                        switch model.offlineMapModels {
+                        case .success(let maps):
+                            ForEach (maps.indices, id: \.self) {idx in
+                                PreplannedMapItemView(model: maps[idx])
+                            }
+                        case .failure (let error):
+                            Text(error.localizedDescription)
+                        case .none:
+                            EmptyView()
                         }
                     } header: {
-                        Text("Web View")
+                        Text("Map Areas")
                             .bold()
                     }
                 }
-                
-                Section {
-                    if model.loading {
-                        Text("Loading preplanned map ...")
-                            .font(.caption)
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationTitle("Explore Maine")
+                .onChange(of: model.networkMonitor.isConnected, {
+                    Task {
+                        await model.loadMaps()
                     }
-                    switch model.offlineMapModels {
-                    case .success(let maps):
-                        ForEach (maps.indices, id: \.self) {idx in
-                            PreplannedMapItemView(model: maps[idx])
-                        }
-                    case .failure (let error):
-                        Text(error.localizedDescription)
-                    case .none:
-                        EmptyView()
-                    }
-                } header: {
-                    Text("Map Areas")
-                        .bold()
+                })
+            }
+            .refreshable {
+                Task{
+                    await model.loadMaps()
                 }
             }
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("Explore Maine")
-            .onChange(of: model.networkMonitor.isConnected, {
-                Task {
-                   await model.loadMaps()
-                }
-            })
-    }
-    .refreshable {
-        Task{
-            await model.loadMaps()
         }
-    }
+        
     }
 }
 
@@ -87,3 +90,9 @@ struct MapDetailsView: View {
     }
 }
 
+
+#Preview(body: {
+    
+    ContentView(model: MapModel(storageMap: CoreDataMapStorage(temporaryDirectory: FileManager.createTemporaryDirectory()),
+                        portalId: "3bc3179f17da44a0ac0bfdac4ad15664", temporaryDirectory: FileManager.createTemporaryDirectory(), networkMonitor: NetworkMonitor.instance))
+})

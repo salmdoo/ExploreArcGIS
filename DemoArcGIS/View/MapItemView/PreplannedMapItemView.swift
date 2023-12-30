@@ -51,7 +51,6 @@ struct PreplannedMapItemView: View {
                 }
             }
             
-            
             if let offlineModel = model as? OfflinePreplannedMap {
                 MapItemView(model: model)
                 
@@ -86,7 +85,9 @@ struct PreplannedMapItemView: View {
                     
                 }
             }
+                
         }
+        .bottomBorder()
     }
 }
 
@@ -107,4 +108,27 @@ extension ProgressView {
     func iconBackground() -> some View {
         self.modifier(IconBackground())
     }
+}
+struct BottomBorder: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .background(
+                GeometryReader { geometry in
+                    Color.clear
+                        .frame(width: geometry.size.width, height: 0.5)
+                        .background(Color.gray.opacity(0.5))
+                        .offset(y: geometry.size.height)
+                }
+            )
+    }
+}
+
+extension View {
+    func bottomBorder() -> some View {
+        self.modifier(BottomBorder())
+    }
+}
+
+#Preview {
+    PreplannedMapItemView(model: MapItem.previewData())
 }
