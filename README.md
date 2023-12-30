@@ -31,9 +31,9 @@
   * Despite the network disconnection, the user is able to access and review the downloaded map.
   * The user can explore map details, and navigate the map details without an internet connection.
 ## Screenshots:
-| Map list | Map details |
-|----------|----------|
-| <kbd>![Simulator Screenshot - iPhone 15 Pro - 2023-12-29 at 22 10 29](https://github.com/salmdoo/ExploreArcGIS/assets/118146780/915013ba-3454-4eef-8e5a-17131aed0d9c)</kbd>|<kbd> ![Simulator Screenshot - iPhone 15 Pro - 2023-12-29 at 22 10 36](https://github.com/salmdoo/ExploreArcGIS/assets/118146780/992a255f-4772-4bf3-8345-df272260641b)</kbd>|
+| Map list | Map details | Delete a downloaded map |
+|----------|----------|----------|
+| <kbd>![Simulator Screenshot - iPhone 15 Pro - 2023-12-30 at 08 49 25](https://github.com/salmdoo/ExploreArcGIS/assets/118146780/cf957b19-c18a-4b2a-801d-59d65bffa679)</kbd>|<kbd> ![Simulator Screenshot - iPhone 15 Pro - 2023-12-29 at 22 10 36](https://github.com/salmdoo/ExploreArcGIS/assets/118146780/992a255f-4772-4bf3-8345-df272260641b)</kbd> | <kbd> ![Simulator Screenshot - iPhone 15 Pro - 2023-12-30 at 08 53 10](https://github.com/salmdoo/ExploreArcGIS/assets/118146780/65d20138-b227-4cb1-aade-6e8ae84c2f48) </kbd>|
 
 ## Non-Functional Requirement:
 1. The application allows users to view and open previously downloaded map areas seamlessly, even when launched without a network connection.
@@ -44,6 +44,7 @@
 2. The application prioritizes user-friendly interaction:
 * Map list refresh: Users can effortlessly update the map list by performing a downward swipe gesture.
 * Confirmation for map removal: The application ensures user confirmation before deleting a map.
+* Indicate progress while the download of preplanned maps is happening. 
 3. The application boasts a highly scalable architecture and consistent data management:
 * Utilizes design patterns: Observer, Singleton, Dependency injection, SOLID, and Protocol Oriented Programming (POP).
 * Applied generic class: all maps are MapItem and the offline maps list can be Preplanned Map or Store Map, which is helpful to expand the Preplanned Map or Store Map if they have new specific behaviors.
